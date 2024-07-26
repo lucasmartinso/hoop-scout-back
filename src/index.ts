@@ -15,6 +15,7 @@ app.use(cors());
 
 //app.use(routers);
 //app.use(errorHandler);
+console.log("OLAAA");
 
 export default app;
 
