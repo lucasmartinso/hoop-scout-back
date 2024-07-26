@@ -1,0 +1,22 @@
+{
+	"type": "postgres",
+	"host": "ep-winter-frog-a5n2qq1q.us-east-2.aws.neon.tech",
+	"port": 5432,
+	"username": "familia-inu-db_owner",
+	"password": "vTEJz2j9uXON",
+	"database": "familia-inu-db",
+	"synchronize": true,
+	"logging": false,
+	"entities": [
+		"src/entity/**/*.ts"
+	],
+	"migrations": [
+		"src/migration/**/*.ts"
+	],
+	"subscribers": [
+		"src/subscriber/**/*.ts"
+	],
+	"ssl": {
+    "rejectUnauthorized": false
+  }
+}
