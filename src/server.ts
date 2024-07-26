@@ -2,7 +2,6 @@ import dotenv from 'dotenv';
 import app from './index';
 dotenv.config();
 
-console.log("BOM DIAAA");
 const PORT: number = Number(process.env.PORT) || 8080;
 
 app.listen(PORT, () => {
