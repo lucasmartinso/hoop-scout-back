@@ -13,4 +13,15 @@ export class ControllerUser {
             return res.status(500).json(error);
         }
     }
+
+    public async postUser(req: Request, res: Response) {
+        try {
+            const user = req.body;
+            await userService.postUser();
+            return res.status(201).send("Created user sucess");
+        } catch (error) {
+            console.error(error);
+            return res.status(500).json(error);
+        }
+    }
 }

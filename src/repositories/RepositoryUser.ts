@@ -7,3 +7,10 @@ export async function getAllUsers() {
 
     return users;
 }
+
+export async function postUser(user) {
+    const usuarioRepository = getRepository(Usuario);
+    const users = await usuarioRepository.create(user);
+
+    return users;
+}

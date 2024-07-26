@@ -5,3 +5,9 @@ export async function getAllUsers() {
 
     return users;
 }
+
+export async function postUser() {
+    const users = await userRepository.getAllUsers();
+
+    return users;
+}
