@@ -1,12 +1,13 @@
 import { getRepository } from "typeorm";
-import {NextFunction, Request, Response} from "express";
+import { Request, Response} from "express";
 import { Usuario } from "../entity/Usuario";
+import * as UserService from ".."
 
-export class ControllerUsuario {
+export class ControllerUser {
 
     private usuarioRepository = getRepository(Usuario);
 
-    async getAll(req: Request, res: Response, next: NextFunction) {
+    async getAll(req: Request, res: Response) {
         try {
             const userList: Usuario[] = await this.usuarioRepository.find();
             return res.status(200).json(userList);
