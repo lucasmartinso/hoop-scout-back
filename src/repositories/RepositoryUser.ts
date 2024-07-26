@@ -2,5 +2,8 @@ import { getRepository } from "typeorm";
 import { Usuario } from "../entity/Usuario";
 
 export async function getAllUsers() {
-    await this.usuarioRepository.find();
+    const usuarioRepository = getRepository(Usuario);
+    const users = await usuarioRepository.find();
+
+    return users;
 }
