@@ -30,7 +30,7 @@ export async function signup(userInfo: Omit<Users,'id'>): Promise<void> {
     await userRepository.createUser(userInfo);
 }
 
-export async function login(userInfo): Promise<string> {
+export async function login(userInfo: Omit<Users,'id | number | createdAt | name'>): Promise<string> {
     const existEmail: Users[] = await userRepository.existEmail(userInfo.email);  
     if(!existEmail.length) throw { type: 'Unauthorized', message: 'Email ou senha invalidos' };
 
@@ -42,6 +42,10 @@ export async function login(userInfo): Promise<string> {
     const token: string = gerateToken(existEmail[0].id, existEmail[0].email, role);
 
     return token;
+}
+
+export async function editProfile(userInfo: Omit<Users,'id'>) {
+    
 }
 
 //----------------FUNCOES DE LOGICA CHAMADAS PELOS SERVICES --------------------
