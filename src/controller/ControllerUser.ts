@@ -32,6 +32,6 @@ export class ControllerUser {
 
         await userService.editProfile(user, id);
 
-        return res.status(201).send("Created user sucess");
+        return res.status(200).send("Edited user profile sucess");
     }
 }

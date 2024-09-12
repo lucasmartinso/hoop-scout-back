@@ -4,7 +4,6 @@ import express, { json } from "express";
 import "express-async-errors";
 import routers from "./routes/routers";
 import errorHandler from "./middlewares/errorHandler";
-import { createConnection } from "typeorm";
 dotenv.config();
 
 const app = express();
@@ -14,7 +13,7 @@ app.use(cors());
 const startServer = async () => {
     try {
       // Estabeleça a conexão com o banco de dados
-      await createConnection();
+      //await createConnection();
       
       app.use(routers);
       app.use(errorHandler);

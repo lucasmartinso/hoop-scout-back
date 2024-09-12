@@ -1,4 +1,3 @@
-import { getRepository } from "typeorm";
 import { Users } from "../entity/Usuario";
 import { QueryResult } from "pg";
 import connection from "../database/postgres";
