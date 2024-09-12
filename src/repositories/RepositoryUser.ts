@@ -12,11 +12,18 @@ export async function getUserById(id): Promise<Users> {
     return users;
 }
 
-export async function existEmail(email: string) {
-    const { rows: users } = await connection.query(`
+export async function existEmail(email: string): Promise<Users[]> {
+    const { rows: users }: QueryResult<Users> = await connection.query(`
         SELECT * FROM "USERS"
         WHERE email = $1
     `,[email]); 
     
     return users;
+}
+
+export async function createUser(user: Users): Promise<void> {
+    await connection.query(`
+        INSERT INTO "USERS"
+        (email, name, number, password, createdAt)
+    `,[user.email, user.name, user.number, user.password, user.createdAt]);     
 }
