@@ -48,6 +48,8 @@ export async function editProfile(userInfo: Omit<Users,'id | createdAt'>, id: nu
     const users: Users[] | null = await userRepository.getUserById(id);
     if(!users.length) throw { type: 'Not Found', message: 'Usuario nao encontrado' };
 
+    console.log(userInfo);
+
     await userRepository.editProfile(userInfo, id);
 }
 
