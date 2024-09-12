@@ -14,7 +14,7 @@ export class ControllerUser {
     public async login(req: Request, res: Response) {
         try {
             const user = req.body;
-            await userService.postUser();
+            await userService.login(user);
             return res.status(201).send("Created user sucess");
         } catch (error) {
             console.error(error.data);
@@ -25,7 +25,7 @@ export class ControllerUser {
     public async signup(req: Request, res: Response) {
         try {
             const user = req.body;
-            await userService.postUser();
+            await userService.signup(user);
             return res.status(201).send("Created user sucess");
         } catch (error) {
             console.error(error.data);
