@@ -3,9 +3,10 @@ import { Users } from "../entity/Usuario";
 import * as userService from "../service/ServiceUser";
 
 export class ControllerUser {
-    public async getAll(req: Request, res: Response) {
-        const userList: Users[] = await userService.getAllUsers();
-        return res.status(200).json(userList);
+    public async getInfo(req: Request, res: Response) {
+        const user: Users = await userService.getAllUsers(id);
+
+        return res.status(200).json(user);
     }
 
     public async postUser(req: Request, res: Response) {
