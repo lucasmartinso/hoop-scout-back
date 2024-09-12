@@ -25,6 +25,9 @@ export async function signup(userInfo: Users) {
 
     const saltRounds = 10; //maior, mais seguro, porem mais lento
     const encryptPassword: string = bcrypt.hashSync(userInfo.password, saltRounds);
+    userInfo.password = encryptPassword;
 
-    console.log(encryptPassword);
+    const currentDate = new Date();
+    const currentDateBrazil = new Date(currentDate.getTime() - 3 * 60 * 60 * 1000); // Ajusta para UTC-3
+    userInfo.createdAt = currentDateBrazil;
 }
