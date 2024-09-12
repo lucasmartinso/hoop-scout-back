@@ -4,7 +4,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 //----------------SERVICES CHAMADAS PELOS CONTROLLERS --------------------
-export async function getAllUsers(id: number) {
+export async function getUserInfo(id: number) {
     const users: Users[] | null = await userRepository.getUserById(id);
     
     if(!users.length) throw { type: 'Bad Request', message: 'Usuario inexistente' };
