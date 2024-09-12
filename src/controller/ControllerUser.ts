@@ -16,7 +16,7 @@ export class ControllerUser {
 
         const token: string = await userService.login(user);
 
-        return res.status(201).send(token);
+        return res.status(200).send(token);
     }
 
     public async signup(req: Request, res: Response) {

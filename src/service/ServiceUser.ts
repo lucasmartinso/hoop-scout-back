@@ -1,7 +1,9 @@
 import { Users } from "../entity/Usuario";
 import * as userRepository from "../repositories/RepositoryUser";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
+//----------------SERVICES CHAMADAS PELOS CONTROLLERS --------------------
 export async function getAllUsers(id: number) {
     const users = await userRepository.getUserById(id);
     
@@ -11,8 +13,14 @@ export async function getAllUsers(id: number) {
 }
 
 export async function login(userInfo): Promise<string> {
-    const existEmail: Users[] = await userRepository.existEmail(userInfo.email); 
-    if(existEmail.length) throw { type: 'Conflit', message: 'Email de usuario ja cadastrado' };
+    const existEmail: Users[] = await userRepository.existEmail(userInfo.email);  
+    if(!existEmail.length) throw { type: 'Unauthorized', message: 'Email ou senha invalidos' };
+
+
+    const descryptPassword = await bcrypt.compareSync(userInfo.password, existEmail[0].password);
+    if(!descryptPassword) throw { type: 'Unauthorized', message: 'Email ou senha invalidos' };
+
+
 
     return "users";
 }
@@ -33,4 +41,25 @@ export async function signup(userInfo: Omit<Users,'id'>): Promise<void> {
     userInfo.createdAt = currentDateBrazil;
 
     await userRepository.createUser(userInfo);
+}
+
+//----------------FUNCOES DE LOGICA CHAMADAS PELOS SERVICES --------------------
+
+function gerateToken(userId: number,email: string): string {
+    const SECRET: string = process.env.TOKEN_SECRET_KEY ?? '';
+    const EXPERIES_IN: string | undefined = process.env.EXPERIES_IN
+
+    const payload: object = {
+        userId, 
+        email, 
+        level: 1
+    }
+
+    const jwtConfig: object = { 
+        expiresIn: EXPERIES_IN
+    }
+
+    const token: string = jwt.sign(payload,SECRET,jwtConfig);
+
+    return token;
 }
