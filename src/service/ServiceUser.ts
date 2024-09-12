@@ -16,7 +16,7 @@ export async function login(userInfo) {
     //return users;
 }
 
-export async function signup(userInfo: Users) {
+export async function signup(userInfo: Omit<Users,'id'>) {
     const existEmail: Users[] = await userRepository.existEmail(userInfo.email); 
     if(existEmail.length) throw { type: 'Conflit', message: 'Email de usuario ja cadastrado' };
 
@@ -28,6 +28,9 @@ export async function signup(userInfo: Users) {
     userInfo.password = encryptPassword;
 
     const currentDate = new Date();
-    const currentDateBrazil = new Date(currentDate.getTime() - 3 * 60 * 60 * 1000); // Ajusta para UTC-3
+    const currentDateBrazil = new Date(currentDate.getTime() - 3 * 60 * 60 * 1000);
     userInfo.createdAt = currentDateBrazil;
+
+    console.log(userInfo);
+    await userRepository.createUser(userInfo);
 }

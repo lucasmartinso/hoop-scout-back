@@ -33,6 +33,7 @@ export async function existNumber(number: string): Promise<Users[]> {
 export async function createUser(user: Omit<Users,'id'>): Promise<void> {
     await connection.query(`
         INSERT INTO "USERS"
-        (email, name, number, password, createdAt)
+        (email, name, number, password, "createdAt")
+        VALUES ($1, $2, $3, $4, $5)
     `,[user.email, user.name, user.number, user.password, user.createdAt]);     
 }

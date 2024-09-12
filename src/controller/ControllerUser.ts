@@ -23,13 +23,8 @@ export class ControllerUser {
     }
 
     public async signup(req: Request, res: Response) {
-        try {
-            const user = req.body;
-            await userService.signup(user);
-            return res.status(201).send("Created user sucess");
-        } catch (error) {
-            console.error(error.data);
-            return res.status(500).json(error);
-        }
+        const user: Omit<Users,'id'> = req.body;
+        await userService.signup(user);
+        return res.status(201).send("Created user sucess");
     }
 }
