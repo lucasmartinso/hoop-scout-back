@@ -11,7 +11,7 @@ const controllerUser = new ControllerUser();
 userRouter.get('/user/profile', validateTokenAuth,controllerUser.getInfo.bind(controllerUser));
 userRouter.post('/signup', schemaValidator(userSchema), controllerUser.signup.bind(controllerUser));
 userRouter.post('/login', schemaValidator(loginSchema), controllerUser.login.bind(controllerUser));
-// userRouter.put('/user/edit/:id'); 
+userRouter.put('/user/edit', validateTokenAuth, controllerUser.editProfile.bind(controllerUser)); 
 // userRouter.delete('/user/delete/:id');
 
 export default userRouter;
