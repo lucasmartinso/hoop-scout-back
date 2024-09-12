@@ -27,9 +27,10 @@ export class ControllerUser {
     }
 
     public async editProfile(req: Request, res: Response) {
+        const { id }: { id: number } = res.locals.user;
         const user: Omit<Users,'id | createdAt'> = req.body;
 
-        await userService.signup(user);
+        await userService.editProfile(user, id);
 
         return res.status(201).send("Created user sucess");
     }
