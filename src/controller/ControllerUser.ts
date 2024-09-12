@@ -4,8 +4,7 @@ import * as userService from "../service/ServiceUser";
 
 export class ControllerUser {
     public async getInfo(req: Request, res: Response) {
-        const { id }: {id:number} = res.locals.user;
-        console.log(id);
+        const { id }: { id:number } = res.locals.user;
         const user: Users = await userService.getAllUsers(id);
 
         return res.status(200).json(user);
