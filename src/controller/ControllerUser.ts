@@ -34,4 +34,13 @@ export class ControllerUser {
 
         return res.status(200).send("Edited user profile sucess");
     }
+
+    public async deleteProfile(req: Request, res: Response) {
+        const { id }: { id: number } = res.locals.user;
+        const user: Omit<Users,'id | createdAt'> = req.body;
+
+        await userService.editProfile(user, id);
+
+        return res.status(200).send("Edited user profile sucess");
+    }
 }
