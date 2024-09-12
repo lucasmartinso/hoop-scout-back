@@ -5,11 +5,11 @@ import jwt from "jsonwebtoken";
 
 //----------------SERVICES CHAMADAS PELOS CONTROLLERS --------------------
 export async function getAllUsers(id: number) {
-    const users = await userRepository.getUserById(id);
+    const users: Users[] | null = await userRepository.getUserById(id);
     
-    //throw { type: 'Bad Request', message: 'Teste' }; //interrompe o co
+    if(!users.length) throw { type: 'Bad Request', message: 'Usuario inexistente' };
 
-    return users;
+    return users[0];
 }
 
 export async function signup(userInfo: Omit<Users,'id'>): Promise<void> {
