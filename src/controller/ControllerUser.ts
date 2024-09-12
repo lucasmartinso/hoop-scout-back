@@ -41,6 +41,6 @@ export class ControllerUser {
 
         await userService.deleteProfile(id, password);
 
-        return res.status(200).send("Edited user profile sucess");
+        return res.status(200).send("Delete profile sucessfuly");
     }
 }
