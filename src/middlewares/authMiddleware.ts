@@ -14,7 +14,7 @@ export async function validateTokenAuth(req: Request, res: Response, next: NextF
     try {
         const SECRET: string = process.env.TOKEN_SECRET_KEY ?? '';
         const { userId } = jwt.verify(token,SECRET) as { userId: number}
-        const user: Users | null = await usersRepository.findUser(userId);
+        const user: Users | null = await userRepository.getUserById(userId);
         res.locals.user = user;
         next();
     } catch (error) {
