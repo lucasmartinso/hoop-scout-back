@@ -12,19 +12,6 @@ export async function getAllUsers(id: number) {
     return users;
 }
 
-export async function login(userInfo): Promise<string> {
-    const existEmail: Users[] = await userRepository.existEmail(userInfo.email);  
-    if(!existEmail.length) throw { type: 'Unauthorized', message: 'Email ou senha invalidos' };
-
-
-    const descryptPassword = await bcrypt.compareSync(userInfo.password, existEmail[0].password);
-    if(!descryptPassword) throw { type: 'Unauthorized', message: 'Email ou senha invalidos' };
-
-
-
-    return "users";
-}
-
 export async function signup(userInfo: Omit<Users,'id'>): Promise<void> {
     const existEmail: Users[] = await userRepository.existEmail(userInfo.email); 
     if(existEmail.length) throw { type: 'Conflit', message: 'Email de usuario ja cadastrado' };
@@ -43,16 +30,33 @@ export async function signup(userInfo: Omit<Users,'id'>): Promise<void> {
     await userRepository.createUser(userInfo);
 }
 
+export async function login(userInfo): Promise<string> {
+    const existEmail: Users[] = await userRepository.existEmail(userInfo.email);  
+    if(!existEmail.length) throw { type: 'Unauthorized', message: 'Email ou senha invalidos' };
+
+    const descryptPassword = await bcrypt.compareSync(userInfo.password, existEmail[0].password);
+    if(!descryptPassword) throw { type: 'Unauthorized', message: 'Email ou senha invalidos' };
+
+    const role: string =  existEmail[0].email === process.env.AUTH_EMAIL ? 'admin' : 'client';
+
+    const token: string = gerateToken(existEmail[0].id, existEmail[0].email, role);
+
+    return token;
+}
+
 //----------------FUNCOES DE LOGICA CHAMADAS PELOS SERVICES --------------------
 
-function gerateToken(userId: number,email: string): string {
+function gerateToken(userId: number,email: string, role: string): string {
     const SECRET: string = process.env.TOKEN_SECRET_KEY ?? '';
     const EXPERIES_IN: string | undefined = process.env.EXPERIES_IN
 
+    const level: number = role === 'client' ? 1 : 2;
+
     const payload: object = {
         userId, 
-        email, 
-        level: 1
+        email,  
+        role,
+        level
     }
 
     const jwtConfig: object = { 
