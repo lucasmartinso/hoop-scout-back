@@ -12,19 +12,18 @@ export class ControllerUser {
     }
 
     public async login(req: Request, res: Response) {
-        try {
-            const user = req.body;
-            await userService.login(user);
-            return res.status(201).send("Created user sucess");
-        } catch (error) {
-            console.error(error.data);
-            return res.status(500).json(error);
-        }
+        const user: Omit<Users,'id | number | createdAt | name'> = req.body;
+
+        const token: string = await userService.login(user);
+
+        return res.status(201).send(token);
     }
 
     public async signup(req: Request, res: Response) {
-        const user: Omit<Users,'id'> = req.body;
+        const user: Omit<Users,'id | createdAt'> = req.body;
+
         await userService.signup(user);
+
         return res.status(201).send("Created user sucess");
     }
 }

@@ -10,13 +10,14 @@ export async function getAllUsers(id: number) {
     return users;
 }
 
-export async function login(userInfo) {
-    //const users = await userRepository.getAllUsers();
+export async function login(userInfo): Promise<string> {
+    const existEmail: Users[] = await userRepository.existEmail(userInfo.email); 
+    if(existEmail.length) throw { type: 'Conflit', message: 'Email de usuario ja cadastrado' };
 
-    //return users;
+    return "users";
 }
 
-export async function signup(userInfo: Omit<Users,'id'>) {
+export async function signup(userInfo: Omit<Users,'id'>): Promise<void> {
     const existEmail: Users[] = await userRepository.existEmail(userInfo.email); 
     if(existEmail.length) throw { type: 'Conflit', message: 'Email de usuario ja cadastrado' };
 
@@ -31,6 +32,5 @@ export async function signup(userInfo: Omit<Users,'id'>) {
     const currentDateBrazil = new Date(currentDate.getTime() - 3 * 60 * 60 * 1000);
     userInfo.createdAt = currentDateBrazil;
 
-    console.log(userInfo);
     await userRepository.createUser(userInfo);
 }

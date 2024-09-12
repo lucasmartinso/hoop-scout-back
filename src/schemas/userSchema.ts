@@ -6,3 +6,8 @@ export const userSchema = joi.object({
     number: joi.string().min(1).max(10).required().label("Fornecer telefone valido"),
     password: joi.string().min(8).required().label("Senha tem que ter no mínimo 8 caracteres")
 });
+
+export const loginSchema = joi.object({ 
+    email: joi.string().email().required().label("Fornecer email valido"),
+    password: joi.string().min(8).required().label("Senha tem que ter no mínimo 8 caracteres")
+});
