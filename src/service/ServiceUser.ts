@@ -60,11 +60,11 @@ export async function deleteProfile(id: number, password: string): Promise<void>
     if(!users.length) throw { type: 'Not Found', message: 'Usuario nao encontrado' };
 
     const descryptPassword = await bcrypt.compareSync(password, users[0].password);
-    if(!descryptPassword) throw { type: 'Unauthorized', message: 'Email ou senha invalidos' };
+    if(!descryptPassword) throw { type: 'Unauthorized', message: 'Senha invalida' };
 
     //DELETAR TODOS OS PETS ASSOCIADOS A ESSE USUARIO 
 
-    //await userRepository
+    await userRepository.deleteProfile(id);
 }
 
 //----------------FUNCOES DE LOGICA CHAMADAS PELOS SERVICES --------------------
