@@ -25,4 +25,12 @@ export class ControllerUser {
 
         return res.status(201).send("Created user sucess");
     }
+
+    public async editProfile(req: Request, res: Response) {
+        const user: Omit<Users,'id | createdAt'> = req.body;
+
+        await userService.signup(user);
+
+        return res.status(201).send("Created user sucess");
+    }
 }
