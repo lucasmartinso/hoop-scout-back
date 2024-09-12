@@ -37,3 +37,11 @@ export async function createUser(user: Omit<Users,'id'>): Promise<void> {
         VALUES ($1, $2, $3, $4, $5)
     `,[user.email, user.name, user.number, user.password, user.createdAt]);     
 }
+
+export async function editProfile(user: Omit<Users,'id | createdAt'>, id: number): Promise<void> {
+    await connection.query(`
+        UPDATE "USERS" 
+        SET email = $1, name = $2, number = $3, password = $4
+        WHERE id = $1
+    `,[user.id, user.email, user.name, user.number, user.password, user.createdAt]);     
+}
