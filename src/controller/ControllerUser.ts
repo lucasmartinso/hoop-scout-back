@@ -1,11 +1,10 @@
-import { getRepository } from "typeorm";
 import { Request, Response} from "express";
-import { Usuario } from "../entity/Usuario";
+import { Users } from "../entity/Usuario";
 import * as userService from "../service/ServiceUser";
 
 export class ControllerUser {
     public async getAll(req: Request, res: Response) {
-        const userList: Usuario[] = await userService.getAllUsers();
+        const userList: Users[] = await userService.getAllUsers();
         return res.status(200).json(userList);
     }
 

@@ -1,16 +1,19 @@
 import { getRepository } from "typeorm";
-import { Usuario } from "../entity/Usuario";
+import { Users } from "../entity/Usuario";
+import { QueryResult } from "pg";
+import connection from "../database/postgres";
 
-export async function getAllUsers() {
-    const usuarioRepository = getRepository(Usuario);
-    const users = await usuarioRepository.find();
+export async function getAllUsers(): Promise<Users[]> {
+    const { rows: users }: QueryResult<Users> = await connection.query(`
+        SELECT * FROM "USERS"
+    `)
 
     return users;
 }
 
 export async function postUser(user) {
-    const usuarioRepository = getRepository(Usuario);
-    const users = await usuarioRepository.create(user);
+    await connection.query(`
+        INSERT * FROM "USERS"
+    `)
 
-    return users;
 }
