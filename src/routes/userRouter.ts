@@ -9,7 +9,7 @@ const controllerUser = new ControllerUser();
 
 //SO SEGUIR A MESMA ESTRUTURA ABAIXO PARA AS DEMAIS ROTAS DESSE CONTROLLER
 //validateTokenAuth
-userRouter.get('/users', controllerUser.getAll.bind(controllerUser));
+userRouter.get('/users', validateTokenAuth,controllerUser.getInfo.bind(controllerUser));
 userRouter.post('/signup', schemaValidator(userSchema), controllerUser.postUser.bind(controllerUser));
 // userRouter.get('/user/profile/:id', controllerUser.getAll.bind(controllerUser)); 
 // userRouter.post('/login'); 
