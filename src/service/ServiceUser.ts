@@ -44,7 +44,7 @@ export async function login(userInfo: Omit<Users,'id | number | createdAt | name
     return token;
 }
 
-export async function editProfile(userInfo: Omit<Users,'id | createdAt'>, id: number) {
+export async function editProfile(userInfo: Omit<Users,'id | createdAt'>, id: number): Promise<void> {
     const users: Users[] | null = await userRepository.getUserById(id);
     if(!users.length) throw { type: 'Not Found', message: 'Usuario nao encontrado' };
 
@@ -53,6 +53,18 @@ export async function editProfile(userInfo: Omit<Users,'id | createdAt'>, id: nu
     userInfo.password = encryptPassword;
 
     await userRepository.editProfile(userInfo, id);
+}
+
+export async function deleteProfile(id: number, password: string): Promise<void> {
+    const users: Users[] | null = await userRepository.getUserById(id);
+    if(!users.length) throw { type: 'Not Found', message: 'Usuario nao encontrado' };
+
+    const descryptPassword = await bcrypt.compareSync(password, users[0].password);
+    if(!descryptPassword) throw { type: 'Unauthorized', message: 'Email ou senha invalidos' };
+
+    //DELETAR TODOS OS PETS ASSOCIADOS A ESSE USUARIO 
+
+    //await userRepository
 }
 
 //----------------FUNCOES DE LOGICA CHAMADAS PELOS SERVICES --------------------

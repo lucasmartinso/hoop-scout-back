@@ -37,9 +37,9 @@ export class ControllerUser {
 
     public async deleteProfile(req: Request, res: Response) {
         const { id }: { id: number } = res.locals.user;
-        const user: Omit<Users,'id | createdAt'> = req.body;
+        const password: string = req.body.password;
 
-        await userService.editProfile(user, id);
+        await userService.deleteProfile(id, password);
 
         return res.status(200).send("Edited user profile sucess");
     }
