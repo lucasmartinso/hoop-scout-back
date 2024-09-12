@@ -21,7 +21,16 @@ export async function existEmail(email: string): Promise<Users[]> {
     return users;
 }
 
-export async function createUser(user: Users): Promise<void> {
+export async function existNumber(number: string): Promise<Users[]> {
+    const { rows: users }: QueryResult<Users> = await connection.query(`
+        SELECT * FROM "USERS"
+        WHERE number = $1
+    `,[number]); 
+    
+    return users;
+}
+
+export async function createUser(user: Omit<Users,'id'>): Promise<void> {
     await connection.query(`
         INSERT INTO "USERS"
         (email, name, number, password, createdAt)
