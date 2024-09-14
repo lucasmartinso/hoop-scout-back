@@ -13,4 +13,15 @@ export class ControllerPet {
         return res.status(500).send(error.message);
        }
     }
+
+    public async editPet(req: Request, res: Response) {
+        try {
+         const pet: Omit<Pet,'userId | createdAt'> = req.body;
+         await petService.editPet(pet);
+         return res.status(201).send("Pet editado com sucesso");
+        } catch (error) {
+         console.error(error);
+         return res.status(500).send(error.message);
+        }
+     }
 }
