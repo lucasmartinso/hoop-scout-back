@@ -29,3 +29,11 @@ export async function editPet(newPet: Omit <Pet,'userId | createdAt'>): Promise<
     );
     return pets;     
 }
+
+export async function getPetListByUser(id: number): Promise<Pet[]> {
+    const { rows: pets }: QueryResult<Pet> = await connection.query(`
+        SELECT * FROM "PETS"
+        WHERE "userId" = $1
+    `,[id]);
+    return pets;
+}

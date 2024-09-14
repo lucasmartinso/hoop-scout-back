@@ -29,6 +29,13 @@ export async function editPet(newPet: Pet){
     if (pets.length === 0) {
         throw new Error('Pet inexistente');
     }
-    
     await petRepository.editPet(newPet);
+};
+
+export async function getPetListByUser(userId: number): Promise<Pet[]>{
+    const pets: Pet[] | null = await petRepository.getPetListByUser(userId);
+    if (pets.length === 0) {
+        throw new Error('Nenhum pet encontrado para o usuario informado.');
+    }
+    return pets;
 };

@@ -35,4 +35,15 @@ export class ControllerPet {
             return res.status(500).send(error.message);
         }
     }
+
+    public async getPetListByUser(req: Request, res: Response) {
+        try {
+            const userId: number = Number(req.params.id);
+            const pets = await petService.getPetListByUser(userId);
+            return res.status(200).send(pets);
+        } catch (error) {
+            console.error(error);
+            return res.status(500).send(error.message);
+        }
+    }
 }
