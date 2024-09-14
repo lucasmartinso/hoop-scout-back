@@ -36,6 +36,17 @@ export class ControllerPet {
         }
     }
 
+    public async deletePet(req: Request, res: Response) {
+        try {
+            const petId: number = Number(req.params.id);
+            await petService.deletePet(petId);
+            return res.status(200).send("Pet excluido");
+        } catch (error) {
+            console.error(error);
+            return res.status(500).send(error.message);
+        }
+    }
+
     public async getPetListByUser(req: Request, res: Response) {
         try {
             const userId: number = Number(req.params.id);

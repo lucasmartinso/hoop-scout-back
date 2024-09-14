@@ -32,6 +32,14 @@ export async function editPet(newPet: Pet){
     await petRepository.editPet(newPet);
 };
 
+export async function deletePet(petId: number){
+    const pets: Pet[] | null = await petRepository.getPetById(petId);
+    if (pets.length === 0) {
+        throw new Error('Pet inexistente');
+    }
+    await petRepository.deletePet(petId);
+};
+
 export async function getPetListByUser(userId: number): Promise<Pet[]>{
     const pets: Pet[] | null = await petRepository.getPetListByUser(userId);
     if (pets.length === 0) {

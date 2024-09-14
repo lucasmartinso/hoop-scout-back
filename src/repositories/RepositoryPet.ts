@@ -30,6 +30,14 @@ export async function editPet(newPet: Omit <Pet,'userId | createdAt'>): Promise<
     return pets;     
 }
 
+export async function deletePet(id: number): Promise<void> {
+    const { rows: pets }: QueryResult<Pet> = await connection.query(`
+        DELETE FROM "PETS"
+        WHERE id = $1
+    `,[id]);
+    return pets;
+}
+
 export async function getPetListByUser(id: number): Promise<Pet[]> {
     const { rows: pets }: QueryResult<Pet> = await connection.query(`
         SELECT * FROM "PETS"
