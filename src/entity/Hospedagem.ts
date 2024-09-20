@@ -1,8 +1,9 @@
 export class Hospedagem{
     id: number;
-    petId: number; 
-    dateScheduled: string; 
-    valor: number; 
-    state: boolean; 
-    comments: string;
+    beginDate: string;
+    finishDate: string;
+    status: boolean;
+    price: number;
+    comment: string;
+    createdAt: Date; 
 }
