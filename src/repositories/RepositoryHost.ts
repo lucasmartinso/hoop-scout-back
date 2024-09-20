@@ -17,5 +17,12 @@ export async function postPetsSchedule(petId: number, serviceId: number): Promis
          ("petId", "serviceId")
          VALUES ($1, $2)
      `,[petId, serviceId]);
- }
+}
+
+export async function getScheduleId(data: Date): Promise<void> {
+    await connection.query(`
+        SELECT * FROM "SERVICES"
+        WHERE "beginDate" = $1
+     `,[data]);
+}
 
