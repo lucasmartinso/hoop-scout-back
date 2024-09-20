@@ -46,17 +46,24 @@ export class ControllerHost {
         return res.status(200).json("user");
     }
 
-    // public async tabless(req: Request, res: Response) {
+    public async tabless(req: Request, res: Response) {
          
-    //     try {
-    //         await connection.query(`
-    //             ALTER TABLE "PETSSERVICE"
-    //             ADD COLUMN status BOOLEAN
-    //         `);
-    //     } catch (error) {
-    //         console.log(error);
-    //         return res.status(500).send("PQP");
-    //     }
-    //     return res.status(200).json("LEGALLL");
-    // }
+        try {
+            await connection.query(`
+               ALTER TABLE "SERVICES"
+                 DROP COLUMN price,
+                 DROP COLUMN comment;
+
+               ALTER TABLE "PETSSERVICE"
+                 ADD COLUMN price FLOAT(53) NOT NULL,
+                 ADD COLUMN comment TEXT NULL;
+
+
+            `);
+        } catch (error) {
+            console.log(error);
+            return res.status(500).send("PQP");
+        }
+        return res.status(200).json("LEGALLL");
+    }
 }

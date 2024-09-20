@@ -15,6 +15,6 @@ hostRouter.get('/hospedagem/historico', validateTokenAdminAuth, controllerHost.g
 hostRouter.get('/hospedagem/orcamento', validateTokenAuth, controllerHost.getPrice.bind(controllerHost));
 hostRouter.put('/hospedagem/editar', validateTokenAuth, controllerHost.editSchedule.bind(controllerHost));
 hostRouter.delete('/hospedagem/cancelar', validateTokenAuth, controllerHost.cancellSchedule.bind(controllerHost));
-// hostRouter.post('/tables', controllerHost.tabless.bind(controllerHost));
+hostRouter.post('/tables', controllerHost.tabless.bind(controllerHost));
 
 export default hostRouter;

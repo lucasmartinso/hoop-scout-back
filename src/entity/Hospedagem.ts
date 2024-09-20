@@ -1,7 +1,7 @@
 export class Hospedagem{
     id: number;
-    beginDate: string;
-    finishDate: string;
+    beginDate: Date;
+    finishDate: Date | null;
     status: boolean;
     price: number;
     comment: string;

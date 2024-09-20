@@ -3,8 +3,6 @@ CREATE TABLE "SERVICES"(
     "beginDate" DATE NOT NULL,
     "finishDate" DATE NULL,
     "status" BOOLEAN NOT NULL,
-    "price" FLOAT(53) NOT NULL,
-    "comment" TEXT NULL,
     "createdAt" DATE NOT NULL
 );
 ALTER TABLE
@@ -23,7 +21,9 @@ CREATE TABLE "PETSSERVICE"(
     "id" SERIAL NOT NULL,
     "petId" INTEGER NOT NULL,
     "serviceId" INTEGER NOT NULL,
-    "status" BOOLEAN NULL
+    "status" BOOLEAN NULL,
+    "price" FLOAT(53) NOT NULL,
+    "comment" TEXT NULL
 );
 ALTER TABLE
     "PETSSERVICE" ADD PRIMARY KEY("id");
