@@ -1,6 +1,7 @@
 import { Request, Response} from "express";
 import { Users } from "../entity/Usuario";
 import * as userService from "../service/ServiceUser";
+import connection from "../database/postgres";
 
 export class ControllerHost {
     public async schedule(req: Request, res: Response) {
