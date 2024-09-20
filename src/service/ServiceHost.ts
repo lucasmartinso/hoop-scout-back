@@ -1,0 +1,1 @@
+import * as hostRepository from "../repositories/RepositoryHost";
