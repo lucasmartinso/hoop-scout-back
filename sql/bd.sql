@@ -1,7 +1,7 @@
 CREATE TABLE "SERVICES"(
     "id" SERIAL NOT NULL,
     "beginDate" DATE NOT NULL,
-    "finishDate" DATE NOT NULL,
+    "finishDate" DATE NULL,
     "status" BOOLEAN NOT NULL,
     "price" FLOAT(53) NOT NULL,
     "comment" TEXT NULL,
@@ -22,7 +22,8 @@ ALTER TABLE
 CREATE TABLE "PETSSERVICE"(
     "id" SERIAL NOT NULL,
     "petId" INTEGER NOT NULL,
-    "serviceId" INTEGER NOT NULL
+    "serviceId" INTEGER NOT NULL,
+    "status" BOOLEAN NULL
 );
 ALTER TABLE
     "PETSSERVICE" ADD PRIMARY KEY("id");

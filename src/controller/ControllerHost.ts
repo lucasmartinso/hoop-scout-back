@@ -1,6 +1,7 @@
 import { Request, Response} from "express";
 import { Users } from "../entity/Usuario";
 import * as userService from "../service/ServiceUser";
+import connection from "../database/postgres";
 
 export class ControllerHost {
     public async schedule(req: Request, res: Response) {
@@ -44,4 +45,18 @@ export class ControllerHost {
 
         return res.status(200).json("user");
     }
+
+    // public async tabless(req: Request, res: Response) {
+         
+    //     try {
+    //         await connection.query(`
+    //             ALTER TABLE "PETSSERVICE"
+    //             ADD COLUMN status BOOLEAN
+    //         `);
+    //     } catch (error) {
+    //         console.log(error);
+    //         return res.status(500).send("PQP");
+    //     }
+    //     return res.status(200).json("LEGALLL");
+    // }
 }
