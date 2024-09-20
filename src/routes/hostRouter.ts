@@ -8,7 +8,7 @@ import { ControllerHost } from "../controller/ControllerHost";
 const hostRouter = Router();
 const controllerHost = new ControllerHost();
 
-hostRouter.post('/agendamento', validateTokenAuth,controllerHost.getInfo.bind(controllerHost));
+hostRouter.post('/agendamento', validateTokenAuth,controllerHost.schedule.bind(controllerHost));
 
 
 export default hostRouter;
