@@ -5,10 +5,10 @@ import { validateTokenAdminAuth } from "../middlewares/authAdminMiddleware";
 import { validateTokenAuth } from "../middlewares/authMiddleware";
 import { ControllerHost } from "../controller/ControllerHost";
 
-const userRouter = Router();
+const hostRouter = Router();
 const controllerHost = new ControllerHost();
 
-userRouter.post('/agendamento', validateTokenAuth,controllerHost.getInfo.bind(controllerHost));
+hostRouter.post('/agendamento', validateTokenAuth,controllerHost.getInfo.bind(controllerHost));
 
 
-export default userRouter;
+export default hostRouter;
