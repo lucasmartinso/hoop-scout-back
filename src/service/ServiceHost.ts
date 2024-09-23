@@ -9,17 +9,22 @@ export async function createSchedule(hostInfo: hostUser, userId: number) {
 
     if(!existPet.length) throw { type: 'Not Found', message: 'Pet inexistente no sistema'};
 
+    const petId: number = hostInfo.petId;
     delete hostInfo.petId;
 
     const hosts: Omit<Hospedagem, 'id' | 'status'> = {...hostInfo, 
-        price: 50, 
-        createdAt:  new Date()
+        price: 49.99, 
+        createdAt: new Date()
     }
-
-    console.log(hosts);
 
     await hostRepository.postSchedule(hosts);
     
-    //const schedule: petService[] = await hostRepository.getScheduleId();
-    //if(!schedule.length)
+    const schedule: Hospedagem[] = await hostRepository.getScheduleId();
+    
+    const petServices: Omit<petService, 'id'> = {
+        petId, 
+        serviceId: schedule[0].id 
+    }
+
+    await hostRepository.postPetsSchedule(petServices);
 }

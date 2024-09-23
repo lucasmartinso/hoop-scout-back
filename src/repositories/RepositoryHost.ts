@@ -12,17 +12,17 @@ export async function postSchedule(hostInfo: Omit<Hospedagem, 'id' | 'status'>):
     `,[hostInfo.beginDate, hostInfo.finishDate, hostInfo.price, hostInfo.comment, hostInfo.createdAt]);
 }
 
-export async function postPetsSchedule(petId: number, serviceId: number): Promise<void> {
+export async function postPetsSchedule(petsServices: Omit<petService, 'id'>): Promise<void> {
     await connection.query(`
-        INSERT INTO "PETSSERVICES"
+        INSERT INTO "PETSSERVICE"
         ("petId", "serviceId")
         VALUES ($1, $2)
-    `,[petId, serviceId]);
+    `,[petsServices.petId, petsServices.serviceId]);
 }
 
-export async function getScheduleId(): Promise<petService[]> {
-    const { rows: schedule }: QueryResult<petService> = await connection.query(`
-        SELECT * FROM SERVICES
+export async function getScheduleId(): Promise<Hospedagem[]> {
+    const { rows: schedule }: QueryResult<Hospedagem> = await connection.query(`
+        SELECT * FROM "SERVICES"
         ORDER BY id DESC
         LIMIT 1;
     `,);
