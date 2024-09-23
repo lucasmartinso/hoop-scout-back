@@ -33,6 +33,7 @@ export async function getScheduleId(): Promise<Hospedagem[]> {
 export async function getHistoric(): Promise<Hospedagem[]> {
     const { rows: schedule }: QueryResult<Hospedagem> = await connection.query(`
         SELECT * FROM "SERVICES"
+        ORDER BY id DESC
     `,);
 
     return schedule;

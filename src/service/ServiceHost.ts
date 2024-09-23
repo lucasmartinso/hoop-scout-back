@@ -32,3 +32,9 @@ export async function createSchedule(hostInfo: hostUser, userId: number) {
         await hostRepository.postPetsSchedule(petServices);
     }
 }
+
+export async function getHistoric(): Promise<Hospedagem[]> {
+    const historic: Hospedagem[] = await hostRepository.getHistoric();
+
+    return historic;
+}

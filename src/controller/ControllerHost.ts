@@ -39,9 +39,9 @@ export class ControllerHost {
     }
 
     public async getHistory(req: Request, res: Response) {
-        
+        const historico: Hospedagem[] = await hostService.getHistoric();
 
-        return res.status(200).json("user");
+        return res.status(200).json(historico);
     }
 
     public async finishHost(req: Request, res: Response) {
