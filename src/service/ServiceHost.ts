@@ -46,3 +46,11 @@ export async function updateServiceStatus(id: number, type: string): Promise<voi
 
     await hostRepository.updateSchedule(id, type); 
 }
+
+export async function getServicePrice(id: number) {
+    const existService: Hospedagem[] = await hostRepository.getScheduleById(id);  
+
+    if(!existService.length) throw { type: 'Not Found', message: 'Servico fornecido inexistente no sistema'};
+
+    return existService[0];
+}

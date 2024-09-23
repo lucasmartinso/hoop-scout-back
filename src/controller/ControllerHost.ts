@@ -15,9 +15,10 @@ export class ControllerHost {
     }
 
     public async getPrice(req: Request, res: Response) {
-         
+        const id: number = Number(req.params.id);
+         const hospedagem: Hospedagem = await hostService.getServicePrice(id);
 
-        return res.status(200).json("user");
+        return res.status(200).json(hospedagem);
     }
 
     public async cancellSchedule(req: Request, res: Response) {

@@ -77,4 +77,3 @@ export async function getScheduleById(id: number): Promise<Hospedagem[]> {
     return schedule;
 }
 
-
