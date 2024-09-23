@@ -1,4 +1,3 @@
-import { Users } from "../entity/Usuario";
 import { QueryResult } from "pg";
 import connection from "../database/postgres";
 import { Hospedagem } from "../entity/Hospedagem";
