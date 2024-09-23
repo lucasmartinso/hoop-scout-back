@@ -33,13 +33,13 @@ export class ControllerHost {
     }
 
     public async confirmSchedule(req: Request, res: Response) {
-         
+        
 
         return res.status(200).json("user");
     }
 
     public async getHistory(req: Request, res: Response) {
-         
+        
 
         return res.status(200).json("user");
     }

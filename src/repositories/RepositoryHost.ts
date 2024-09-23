@@ -30,4 +30,12 @@ export async function getScheduleId(): Promise<Hospedagem[]> {
     return schedule;
 }
 
+export async function getHistoric(): Promise<Hospedagem[]> {
+    const { rows: schedule }: QueryResult<Hospedagem> = await connection.query(`
+        SELECT * FROM "SERVICES"
+    `,);
+
+    return schedule;
+}
+
 
