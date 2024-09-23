@@ -61,4 +61,12 @@ export async function getHistoric(): Promise<Hospedagem[]> {
     return schedule.map(object => object.json_build_object);
 }
 
+export async function updateSchedule(id: number, type: string): Promise<void> { 
+    await connection.query(`
+        UPDATE "SERVICES" 
+        SET status = $2
+        WHERE id = $1
+    `,[id,type]);
+}
+
 

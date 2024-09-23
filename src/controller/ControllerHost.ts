@@ -23,7 +23,7 @@ export class ControllerHost {
     public async cancellSchedule(req: Request, res: Response) {
          
 
-        return res.status(200).json("user");
+        return res.status(200).json("Agendamento cancelado");
     }
 
     public async editSchedule(req: Request, res: Response) {
@@ -35,7 +35,7 @@ export class ControllerHost {
     public async confirmSchedule(req: Request, res: Response) {
         
 
-        return res.status(200).json("user");
+        return res.status(200).json("Agendamento confirmado");
     }
 
     public async getHistory(req: Request, res: Response) {
@@ -47,7 +47,7 @@ export class ControllerHost {
     public async finishHost(req: Request, res: Response) {
          
 
-        return res.status(200).json("user");
+        return res.status(200).json("Hospedagem concluida");
     }
 
     public async tabless(req: Request, res: Response) {

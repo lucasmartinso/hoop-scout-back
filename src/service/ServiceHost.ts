@@ -38,3 +38,7 @@ export async function getHistoric(): Promise<Hospedagem[]> {
 
     return historic;
 }
+
+export async function confirmService(): Promise<void> {
+    // await 
+}
