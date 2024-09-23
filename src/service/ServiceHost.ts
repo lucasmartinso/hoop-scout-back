@@ -23,7 +23,7 @@ export async function createSchedule(hostInfo: hostUser, userId: number) {
     
     const schedule: Hospedagem[] = await hostRepository.getScheduleId();
     
-    for(let i=0; petIds.length; i++) {
+    for(let i=0; i<petIds.length; i++) {
         const petServices: Omit<petService, 'id'> = {
             petId: petIds[i], 
             serviceId: schedule[0].id 
