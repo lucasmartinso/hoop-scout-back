@@ -4,12 +4,12 @@ import connection from "../database/postgres";
 import { Hospedagem } from "../entity/Hospedagem";
 import { petService } from "../types/petsServiceType";
 
-export async function postSchedule(hostInfo: Omit<Hospedagem, 'id' | 'value' | 'finishDate'>): Promise<void> {
+export async function postSchedule(hostInfo: Omit<Hospedagem, 'id'>): Promise<void> {
    await connection.query(`
         INSERT INTO "SERVICES"
-        ("beginDate", status, price, comment, "createdAt")
+        ("beginDate", "finshDate", price, comment, "createdAt")
         VALUES ($1, $2, $3, $4, $5)
-    `,[hostInfo.beginDate, false, hostInfo.price, hostInfo.comment, hostInfo.createdAt]);
+    `,[hostInfo.beginDate, hostInfo.finishDate, hostInfo.price, hostInfo.comment, hostInfo.createdAt]);
 }
 
 export async function postPetsSchedule(petId: number, serviceId: number): Promise<void> {
@@ -20,12 +20,14 @@ export async function postPetsSchedule(petId: number, serviceId: number): Promis
     `,[petId, serviceId]);
 }
 
-export async function getScheduleId(data: Date): Promise<petService[]> {
+export async function getScheduleId(): Promise<petService[]> {
     const { rows: schedule }: QueryResult<petService> = await connection.query(`
-        SELECT * FROM "SERVICES"
-        WHERE "beginDate" = $1
-    `,[data]);
+        SELECT * FROM SERVICES
+        ORDER BY id DESC
+        LIMIT 1;
+    `,);
 
     return schedule;
 }
+
 

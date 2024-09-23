@@ -8,7 +8,7 @@ export class ControllerHost {
     public async schedule(req: Request, res: Response) {
         const host: hostUser = req.body;
         
-        //await hostService.createSchedule(host);
+        await hostService.createSchedule(host);
 
         return res.status(200).json(host);
     }

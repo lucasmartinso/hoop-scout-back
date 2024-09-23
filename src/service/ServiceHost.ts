@@ -6,7 +6,11 @@ import { hostUser, petService } from "../types/petsServiceType";
 
 export async function createSchedule(hostInfo: hostUser) {
     const existPet: Pet[] = await petRepository.getPetById(hostInfo.petId);
-    const schedule: petService[] = await hostRepository.getScheduleId(hostInfo.beginDate);
 
+    if(!existPet.length) throw { type: 'Not Found', message: 'Pet inexistente no sistema'};
+
+    
+    
+    const schedule: petService[] = await hostRepository.getScheduleId();
     //if(!schedule.length)
 }
