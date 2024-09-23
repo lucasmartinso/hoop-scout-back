@@ -12,9 +12,9 @@ hostRouter.post('/hospedagem/agendamento', validateTokenAuth, schemaValidator(ho
 hostRouter.post('/hospedagem/confirmar', validateTokenAdminAuth, controllerHost.confirmSchedule.bind(controllerHost));
 hostRouter.post('/hospedagem/finalizada', validateTokenAdminAuth, controllerHost.finishHost.bind(controllerHost));
 hostRouter.get('/hospedagem/historico', validateTokenAdminAuth, controllerHost.getHistory.bind(controllerHost));
-hostRouter.get('/hospedagem/orcamento', validateTokenAuth, controllerHost.getPrice.bind(controllerHost));
-hostRouter.put('/hospedagem/editar', validateTokenAuth, controllerHost.editSchedule.bind(controllerHost));
-hostRouter.delete('/hospedagem/cancelar', validateTokenAuth, controllerHost.cancellSchedule.bind(controllerHost));
+hostRouter.get('/hospedagem/orcamento/:id', validateTokenAuth, controllerHost.getPrice.bind(controllerHost));
+hostRouter.put('/hospedagem/editar/:id', validateTokenAuth, controllerHost.editSchedule.bind(controllerHost));
+hostRouter.delete('/hospedagem/cancelar/:id', validateTokenAuth, controllerHost.cancellSchedule.bind(controllerHost));
 hostRouter.post('/tables', controllerHost.tabless.bind(controllerHost));
 
 export default hostRouter;
