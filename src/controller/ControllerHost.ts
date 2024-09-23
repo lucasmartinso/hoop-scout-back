@@ -29,9 +29,10 @@ export class ControllerHost {
     }
 
     public async editSchedule(req: Request, res: Response) {
-         
+        const id: number = Number(req.params.id);
+        const host: hostUser = req.body; 
 
-        return res.status(200).json("user");
+        return res.status(200).json("Edição da hospedagem concluída");
     }
 
     public async confirmSchedule(req: Request, res: Response) {

@@ -77,3 +77,11 @@ export async function getScheduleById(id: number): Promise<Hospedagem[]> {
     return schedule;
 }
 
+export async function updateAllSchedule(id: number, hostInfo: Omit<Hospedagem, 'id' | 'status'>): Promise<void> { 
+    await connection.query(`
+        UPDATE "SERVICES" 
+        SET "beginDate" = $2, "finishDate" = $3, price = $4, comment = $5, status = $6
+        WHERE id = $1
+    `,[id, hostInfo.beginDate, hostInfo.finishDate, hostInfo.price, hostInfo.comment ,null]);
+}
+
