@@ -7,10 +7,11 @@ import { hostUser } from "../types/petsServiceType";
 export class ControllerHost {
     public async schedule(req: Request, res: Response) {
         const host: hostUser = req.body;
+        const { id }: { id: number } = res.locals.user;
         
-        await hostService.createSchedule(host);
+        await hostService.createSchedule(host, id);
 
-        return res.status(200).json(host);
+        return res.status(200).send("Agendamento solicitado com sucesso");
     }
 
     public async getPrice(req: Request, res: Response) {

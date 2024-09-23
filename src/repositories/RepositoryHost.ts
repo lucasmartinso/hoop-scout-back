@@ -4,10 +4,10 @@ import connection from "../database/postgres";
 import { Hospedagem } from "../entity/Hospedagem";
 import { petService } from "../types/petsServiceType";
 
-export async function postSchedule(hostInfo: Omit<Hospedagem, 'id'>): Promise<void> {
+export async function postSchedule(hostInfo: Omit<Hospedagem, 'id' | 'status'>): Promise<void> {
    await connection.query(`
         INSERT INTO "SERVICES"
-        ("beginDate", "finshDate", price, comment, "createdAt")
+        ("beginDate", "finishDate", price, comment, "createdAt")
         VALUES ($1, $2, $3, $4, $5)
     `,[hostInfo.beginDate, hostInfo.finishDate, hostInfo.price, hostInfo.comment, hostInfo.createdAt]);
 }
