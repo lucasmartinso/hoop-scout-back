@@ -1,5 +1,6 @@
 import { Hospedagem } from "../entity/Hospedagem";
 import { Pet } from "../entity/Pet";
+import { Users } from "../entity/Usuario";
 import * as hostRepository from "../repositories/RepositoryHost";
 import * as petRepository from "../repositories/RepositoryPet";
 import { hostUser, petService } from "../types/petsServiceType";
@@ -53,4 +54,10 @@ export async function getServicePrice(id: number) {
     if(!existService.length) throw { type: 'Not Found', message: 'Servico fornecido inexistente no sistema'};
 
     return existService[0];
+}
+
+export async function getUsers(): Promise<Users[]> {
+    const users: Users[] = await hostRepository.getListUsers();
+
+    return users;
 }

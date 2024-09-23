@@ -3,6 +3,7 @@ import { Hospedagem } from "../entity/Hospedagem";
 import * as hostService from "../service/ServiceHost";
 import connection from "../database/postgres";
 import { hostUser } from "../types/petsServiceType";
+import { Users } from "../entity/Usuario";
 
 export class ControllerHost {
     public async schedule(req: Request, res: Response) {
@@ -46,6 +47,12 @@ export class ControllerHost {
         await hostService.updateServiceStatus(id, "finalizado");
 
         return res.status(200).json("Hospedagem concluida");
+    }
+
+    public async getUsers(req: Request, res: Response) {
+        const users: Users[] = await hostService.getUsers();
+
+        return res.status(200).json(users);
     }
 
     // public async tabless(req: Request, res: Response) {

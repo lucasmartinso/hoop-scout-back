@@ -14,6 +14,7 @@ hostRouter.post('/hospedagem/finalizar/:id', validateTokenAdminAuth, controllerH
 hostRouter.get('/hospedagem/historico', validateTokenAdminAuth, controllerHost.getHistory.bind(controllerHost));
 hostRouter.get('/hospedagem/orcamento/:id', validateTokenAuth, controllerHost.getPrice.bind(controllerHost));
 hostRouter.delete('/hospedagem/cancelar/:id', validateTokenAuth, controllerHost.cancellSchedule.bind(controllerHost));
+hostRouter.get('/clients', validateTokenAdminAuth, controllerHost.getUsers.bind(controllerHost));
 //hostRouter.post('/tables', controllerHost.tabless.bind(controllerHost));
 
 export default hostRouter;

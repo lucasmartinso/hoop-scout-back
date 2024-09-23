@@ -2,6 +2,7 @@ import { QueryResult } from "pg";
 import connection from "../database/postgres";
 import { Hospedagem } from "../entity/Hospedagem";
 import { petService } from "../types/petsServiceType";
+import { Users } from "../entity/Usuario";
 
 export async function postSchedule(hostInfo: Omit<Hospedagem, 'id' | 'status'>): Promise<void> {
    await connection.query(`
@@ -83,5 +84,13 @@ export async function updateAllSchedule(id: number, hostInfo: Omit<Hospedagem, '
         SET "beginDate" = $2, "finishDate" = $3, price = $4, comment = $5, status = $6
         WHERE id = $1
     `,[id, hostInfo.beginDate, hostInfo.finishDate, hostInfo.price, hostInfo.comment ,null]);
+}
+
+export async function getListUsers(): Promise<Users[]> {
+    const { rows: users }: QueryResult<Users> = await connection.query(`
+        SELECT * FROM "USERS"    
+    `)
+
+    return users;
 }
 
