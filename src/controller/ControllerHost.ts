@@ -28,13 +28,6 @@ export class ControllerHost {
         return res.status(200).json("Agendamento cancelado");
     }
 
-    public async editSchedule(req: Request, res: Response) {
-        const id: number = Number(req.params.id);
-        const host: hostUser = req.body; 
-
-        return res.status(200).json("Edição da hospedagem concluída");
-    }
-
     public async confirmSchedule(req: Request, res: Response) {
         const id: number = Number(req.params.id);
         await hostService.updateServiceStatus(id, "confirmado");
@@ -55,30 +48,30 @@ export class ControllerHost {
         return res.status(200).json("Hospedagem concluida");
     }
 
-    public async tabless(req: Request, res: Response) {
+    // public async tabless(req: Request, res: Response) {
          
-        try {
-            await connection.query(`
-                ALTER TABLE "PETSSERVICE"
-                    DROP COLUMN status,
-                    DROP COLUMN price,
-                    DROP COLUMN comment;
+    //     try {
+    //         await connection.query(`
+    //             ALTER TABLE "PETSSERVICE"
+    //                 DROP COLUMN status,
+    //                 DROP COLUMN price,
+    //                 DROP COLUMN comment;
 
-                CREATE TYPE status_enum AS ENUM ('confirmado', 'em andamento', 'cancelado', 'finalizado');
+    //             CREATE TYPE status_enum AS ENUM ('confirmado', 'em andamento', 'cancelado', 'finalizado');
 
-                ALTER TABLE "SERVICES"
-                    DROP COLUMN status;
+    //             ALTER TABLE "SERVICES"
+    //                 DROP COLUMN status;
 
-                ALTER TABLE "SERVICES"
-                    ADD COLUMN status status_enum NULL,
-                    ADD COLUMN price FLOAT(53) NOT NULL,
-                    ADD COLUMN comment TEXT NULL;
+    //             ALTER TABLE "SERVICES"
+    //                 ADD COLUMN status status_enum NULL,
+    //                 ADD COLUMN price FLOAT(53) NOT NULL,
+    //                 ADD COLUMN comment TEXT NULL;
 
-            `);
-        } catch (error) {
-            console.log(error);
-            return res.status(500).send("PQP");
-        }
-        return res.status(200).json("LEGALLL");
-    }
+    //         `);
+    //     } catch (error) {
+    //         console.log(error);
+    //         return res.status(500).send("PQP");
+    //     }
+    //     return res.status(200).json("LEGALLL");
+    // }
 }
