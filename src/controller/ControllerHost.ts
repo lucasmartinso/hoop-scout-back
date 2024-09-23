@@ -21,7 +21,8 @@ export class ControllerHost {
     }
 
     public async cancellSchedule(req: Request, res: Response) {
-         
+        const id: number = Number(req.params.id);
+        await hostService.updateServiceStatus(id, "cancelado");
 
         return res.status(200).json("Agendamento cancelado");
     }
@@ -46,7 +47,8 @@ export class ControllerHost {
     }
 
     public async finishHost(req: Request, res: Response) {
-         
+        const id: number = Number(req.params.id);
+        await hostService.updateServiceStatus(id, "finalizado");
 
         return res.status(200).json("Hospedagem concluida");
     }
