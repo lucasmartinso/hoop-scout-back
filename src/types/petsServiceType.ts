@@ -2,5 +2,11 @@ export interface petService {
     id: number;
     petId: number;
     serviceId: number;
-    status: boolean | null;
+}
+
+export interface hostUser {
+    beginDate: Date; 
+    finishDate: Date; 
+    petId: number; 
+    comment: string;
 }

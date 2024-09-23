@@ -1,13 +1,16 @@
 import { Request, Response} from "express";
-import { Users } from "../entity/Usuario";
-import * as userService from "../service/ServiceUser";
+import { Hospedagem } from "../entity/Hospedagem";
+import * as hostService from "../service/ServiceHost";
 import connection from "../database/postgres";
+import { hostUser } from "../types/petsServiceType";
 
 export class ControllerHost {
     public async schedule(req: Request, res: Response) {
-         
+        const host: hostUser = req.body;
+        
+        //await hostService.createSchedule(host);
 
-        return res.status(200).json("user");
+        return res.status(200).json(host);
     }
 
     public async getPrice(req: Request, res: Response) {

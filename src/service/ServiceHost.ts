@@ -1,8 +1,11 @@
 import { Hospedagem } from "../entity/Hospedagem";
+import { Pet } from "../entity/Pet";
 import * as hostRepository from "../repositories/RepositoryHost";
-import { petService } from "../types/petsServiceType";
+import * as petRepository from "../repositories/RepositoryPet";
+import { hostUser, petService } from "../types/petsServiceType";
 
-export async function createSchedule(hostInfo: Omit<Hospedagem, 'id' | 'value' | 'finishDate'>) {
+export async function createSchedule(hostInfo: hostUser) {
+    const existPet: Pet[] = await petRepository.getPetById(hostInfo.petId);
     const schedule: petService[] = await hostRepository.getScheduleId(hostInfo.beginDate);
 
     //if(!schedule.length)
