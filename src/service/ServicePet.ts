@@ -13,11 +13,8 @@ export async function getPetInfo(petId: number): Promise<Pet>{
     
 };
 
-export async function createPet(newPet: Pet){
-    const users: Users[] | null = await userRepository.getUserById(newPet.userId);
-    if (users.length === 0) {
-        throw new Error('Usuário inexistente');
-    }
+export async function createPet(newPet: Pet, userId: number){
+    newPet.userId = userId;
 
     newPet.birthDate = new Date();
     newPet.createdAt = new Date();
