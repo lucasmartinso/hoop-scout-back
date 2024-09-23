@@ -20,7 +20,7 @@ export async function postPetsSchedule(petsServices: Omit<petService, 'id'>): Pr
     `,[petsServices.petId, petsServices.serviceId]);
 }
 
-export async function getScheduleId(): Promise<Hospedagem[]> {
+export async function getLastSchedule(): Promise<Hospedagem[]> {
     const { rows: schedule }: QueryResult<Hospedagem> = await connection.query(`
         SELECT * FROM "SERVICES"
         ORDER BY id DESC
@@ -67,6 +67,15 @@ export async function updateSchedule(id: number, type: string): Promise<void> {
         SET status = $2
         WHERE id = $1
     `,[id,type]);
+}
+
+export async function getScheduleById(id: number): Promise<Hospedagem[]> {
+    const { rows: schedule } = await connection.query(`
+        SELECT * FROM "SERVICES" 
+        WHERE id = $1     
+    `,[id]);
+
+    return schedule;
 }
 
 

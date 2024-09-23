@@ -21,7 +21,7 @@ export async function createSchedule(hostInfo: hostUser, userId: number) {
 
     await hostRepository.postSchedule(hosts);
     
-    const schedule: Hospedagem[] = await hostRepository.getScheduleId();
+    const schedule: Hospedagem[] = await hostRepository.getLastSchedule();
     
     for(let i=0; i<petIds.length; i++) {
         const petServices: Omit<petService, 'id'> = {
@@ -39,6 +39,10 @@ export async function getHistoric(): Promise<Hospedagem[]> {
     return historic;
 }
 
-export async function confirmService(): Promise<void> {
-    // await 
+export async function updateServiceStatus(id: number, type: string): Promise<void> {
+    const existService: Hospedagem[] = await hostRepository.getScheduleById(id);  
+
+    if(!existService.length) throw { type: 'Not Found', message: 'Servico fornecido inexistente no sistema'};
+
+    await hostRepository.updateSchedule(id, type); 
 }
