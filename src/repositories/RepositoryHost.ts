@@ -32,11 +32,33 @@ export async function getScheduleId(): Promise<Hospedagem[]> {
 
 export async function getHistoric(): Promise<Hospedagem[]> {
     const { rows: schedule }: QueryResult<Hospedagem> = await connection.query(`
-        SELECT * FROM "SERVICES"
-        ORDER BY id DESC
+        SELECT json_build_object(
+            'id', s.id,
+            'user', u.name,
+            'beginDate', s."beginDate", 
+            'finishDate', s."finishDate", 
+            'price', s.price, 
+            'status', s.status, 
+            'comment', s.comment,
+            'createdAt', s."createdAt",
+            'pets', json_agg(json_build_object(
+                'id', p.id, 
+                'name', p.name,
+                'breed', p.breed,
+                'type', p.type,
+                'sex', p.sex, 
+                'comment', p.comment
+            )) 
+        )
+        FROM "SERVICES" s
+        JOIN "PETSSERVICE" ps ON ps."serviceId"=s.id
+        JOIN "PETS" p ON p.id = ps."petId"
+        JOIN "USERS" u ON u.id = p."userId"
+        GROUP BY s.id, u.name
+        ORDER BY s.id DESC
     `,);
 
-    return schedule;
+    return schedule.map(object => object.json_build_object);
 }
 
 
