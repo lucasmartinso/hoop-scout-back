@@ -33,7 +33,8 @@ export class ControllerHost {
     }
 
     public async confirmSchedule(req: Request, res: Response) {
-        
+        const id: number = Number(req.params.id);
+        await hostService.updateServiceStatus(id, "confirmado");
 
         return res.status(200).json("Agendamento confirmado");
     }

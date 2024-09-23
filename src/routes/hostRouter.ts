@@ -9,7 +9,7 @@ const hostRouter = Router();
 const controllerHost = new ControllerHost();
 
 hostRouter.post('/hospedagem/agendamento', validateTokenAuth, schemaValidator(hostSchema), controllerHost.schedule.bind(controllerHost));
-hostRouter.post('/hospedagem/confirmar', validateTokenAdminAuth, controllerHost.confirmSchedule.bind(controllerHost));
+hostRouter.post('/hospedagem/confirmar/:id', validateTokenAdminAuth, controllerHost.confirmSchedule.bind(controllerHost));
 hostRouter.post('/hospedagem/finalizada', validateTokenAdminAuth, controllerHost.finishHost.bind(controllerHost));
 hostRouter.get('/hospedagem/historico', validateTokenAdminAuth, controllerHost.getHistory.bind(controllerHost));
 hostRouter.get('/hospedagem/orcamento/:id', validateTokenAuth, controllerHost.getPrice.bind(controllerHost));
