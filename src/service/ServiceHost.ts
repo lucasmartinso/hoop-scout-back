@@ -5,15 +5,17 @@ import * as petRepository from "../repositories/RepositoryPet";
 import { hostUser, petService } from "../types/petsServiceType";
 
 export async function createSchedule(hostInfo: hostUser, userId: number) {
-    const existPet: Pet[] = await petRepository.getPetById(hostInfo.petId);
+    for(let i=0; i<hostInfo.petId.length; i++) {
+        const existPet: Pet[] = await petRepository.getPetById(hostInfo.petId[i]);
 
-    if(!existPet.length) throw { type: 'Not Found', message: 'Pet inexistente no sistema'};
+        if(!existPet.length) throw { type: 'Not Found', message: 'Pet fornecido inexistente no sistema'};
+    }
 
-    const petId: number = hostInfo.petId;
+    const petIds: number[] = hostInfo.petId;
     delete hostInfo.petId;
 
     const hosts: Omit<Hospedagem, 'id' | 'status'> = {...hostInfo, 
-        price: 49.99, 
+        price: petIds.length * 49.99, 
         createdAt: new Date()
     }
 
@@ -21,10 +23,12 @@ export async function createSchedule(hostInfo: hostUser, userId: number) {
     
     const schedule: Hospedagem[] = await hostRepository.getScheduleId();
     
-    const petServices: Omit<petService, 'id'> = {
-        petId, 
-        serviceId: schedule[0].id 
-    }
+    for(let i=0; petIds.length; i++) {
+        const petServices: Omit<petService, 'id'> = {
+            petId: petIds[i], 
+            serviceId: schedule[0].id 
+        }
 
-    await hostRepository.postPetsSchedule(petServices);
+        await hostRepository.postPetsSchedule(petServices);
+    }
 }

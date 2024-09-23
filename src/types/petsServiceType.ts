@@ -7,6 +7,6 @@ export interface petService {
 export interface hostUser {
     beginDate: Date; 
     finishDate: Date; 
-    petId: number; 
+    petId: number[]; 
     comment: string;
 }
