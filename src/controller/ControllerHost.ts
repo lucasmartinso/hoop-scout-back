@@ -50,14 +50,20 @@ export class ControllerHost {
          
         try {
             await connection.query(`
-               ALTER TABLE "SERVICES"
-                 DROP COLUMN price,
-                 DROP COLUMN comment;
+                ALTER TABLE "PETSSERVICE"
+                    DROP COLUMN status,
+                    DROP COLUMN price,
+                    DROP COLUMN comment;
 
-               ALTER TABLE "PETSSERVICE"
-                 ADD COLUMN price FLOAT(53) NOT NULL,
-                 ADD COLUMN comment TEXT NULL;
+                CREATE TYPE status_enum AS ENUM ('confirmado', 'em andamento', 'cancelado', 'finalizado');
 
+                ALTER TABLE "SERVICES"
+                    DROP COLUMN status;
+
+                ALTER TABLE "SERVICES"
+                    ADD COLUMN status status_enum NULL,
+                    ADD COLUMN price FLOAT(53) NOT NULL,
+                    ADD COLUMN comment TEXT NULL;
 
             `);
         } catch (error) {
