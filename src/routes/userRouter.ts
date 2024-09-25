@@ -3,6 +3,7 @@ import { ControllerUser } from "../controller/ControllerUser";
 import schemaValidator from "../middlewares/schemaValidator";
 import { userSchema, loginSchema } from "../schemas/userSchema";
 import { validateTokenAuth } from "../middlewares/authMiddleware";
+import { validateTokenAdminAuth } from "../middlewares/authAdminMiddleware";
 
 const userRouter = Router();
 const controllerUser = new ControllerUser();
@@ -13,5 +14,7 @@ userRouter.post('/signup', schemaValidator(userSchema), controllerUser.signup.bi
 userRouter.post('/login', schemaValidator(loginSchema), controllerUser.login.bind(controllerUser));
 userRouter.put('/user/edit', validateTokenAuth, controllerUser.editProfile.bind(controllerUser)); 
 userRouter.delete('/user/delete', validateTokenAuth, controllerUser.deleteProfile.bind(controllerUser));
+userRouter.post('/user/auth',validateTokenAuth, controllerUser.verifyAuthUser.bind(controllerUser));
+userRouter.post('/admin/auth',validateTokenAdminAuth, controllerUser.verifyAuthAdmin.bind(controllerUser));
 
 export default userRouter;

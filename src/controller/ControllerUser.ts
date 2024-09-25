@@ -43,4 +43,12 @@ export class ControllerUser {
 
         return res.status(200).send("Delete profile sucessfuly");
     }
+
+    public async verifyAuthUser(req: Request, res: Response) {
+        return res.status(200).send("Perfil com autorizacao necessaria");
+    }
+
+    public async verifyAuthAdmin(req: Request, res: Response) {
+        return res.status(200).send("Perfil com autorizacao de administrador");
+    }
 }
