@@ -61,3 +61,9 @@ export async function getUsers(): Promise<Users[]> {
 
     return users;
 }
+
+export async function getHistoricClient(id: number): Promise<Hospedagem[]> {
+    const hospedagens: Hospedagem[] = await hostRepository.getHistoricClient(id);
+
+    return hospedagens;
+}

@@ -94,3 +94,35 @@ export async function getListUsers(): Promise<Users[]> {
     return users;
 }
 
+export async function getHistoricClient(id: number): Promise<Hospedagem[]> {
+    const { rows: schedule }: QueryResult<Hospedagem> = await connection.query(`
+        SELECT json_build_object(
+            'id', s.id,
+            'beginDate', s."beginDate", 
+            'finishDate', s."finishDate", 
+            'price', s.price, 
+            'status', s.status, 
+            'comment', s.comment,
+            'createdAt', s."createdAt",
+            'pets', json_agg(json_build_object(
+                'id', p.id, 
+                'name', p.name,
+                'breed', p.breed,
+                'type', p.type,
+                'sex', p.sex, 
+                'comment', p.comment
+            )) 
+        )
+        FROM "SERVICES" s
+        JOIN "PETSSERVICE" ps ON ps."serviceId" = s.id
+        JOIN "PETS" p ON p.id = ps."petId"
+        JOIN "USERS" u ON u.id = p."userId"
+        WHERE u.id = $1
+        GROUP BY s.id, u.name
+        ORDER BY s.id DESC
+    `,[id]);
+
+    return schedule.map(object => object.json_build_object);
+}
+
+

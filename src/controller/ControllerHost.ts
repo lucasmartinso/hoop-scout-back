@@ -55,6 +55,13 @@ export class ControllerHost {
         return res.status(200).json(users);
     }
 
+    public async historicClient(req: Request, res: Response) {
+        const { id }: { id: number } = res.locals.user;
+        const hospedagem: Hospedagem[] = await hostService.getHistoricClient(id);
+
+        return res.status(200).json(hospedagem);
+    }
+
     // public async tabless(req: Request, res: Response) {
          
     //     try {
