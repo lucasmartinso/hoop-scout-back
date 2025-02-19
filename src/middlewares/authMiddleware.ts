@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
-import { Users } from "../entity/Usuario";
+import { Users } from "../entity/User";
 import * as userRepository from "../repositories/RepositoryUser";
 dotenv.config();
 

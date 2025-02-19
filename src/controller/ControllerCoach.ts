@@ -1,5 +1,5 @@
 import { Request, Response} from "express";
-import { Pet } from "../entity/Pet";
+import { Pet } from "../entity/Coach";
 import * as petService from "../service/ServicePet";
 
 export class ControllerPet {

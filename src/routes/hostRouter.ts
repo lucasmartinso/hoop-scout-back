@@ -2,7 +2,7 @@ import { Router } from "express";
 import schemaValidator from "../middlewares/schemaValidator";
 import { validateTokenAdminAuth } from "../middlewares/authAdminMiddleware";
 import { validateTokenAuth } from "../middlewares/authMiddleware";
-import { ControllerHost } from "../controller/ControllerHost";
+import { ControllerHost } from "../controller/ControllerAthlete";
 import { hostSchema } from "../schemas/hostSchema";
 
 const hostRouter = Router();

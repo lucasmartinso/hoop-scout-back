@@ -1,5 +1,5 @@
 import { Request, Response} from "express";
-import { Users } from "../entity/Usuario";
+import { Users } from "../entity/User";
 import * as userService from "../service/ServiceUser";
 
 export class ControllerUser {

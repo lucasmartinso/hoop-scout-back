@@ -1,6 +1,6 @@
-import { Hospedagem } from "../entity/Hospedagem";
-import { Pet } from "../entity/Pet";
-import { Users } from "../entity/Usuario";
+import { Hospedagem } from "../entity/Athlete";
+import { Pet } from "../entity/Coach";
+import { Users } from "../entity/User";
 import * as hostRepository from "../repositories/RepositoryHost";
 import * as petRepository from "../repositories/RepositoryPet";
 import { hostUser, petService } from "../types/petsServiceType";

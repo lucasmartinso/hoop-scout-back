@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { ControllerPet } from "../controller/ControllerPet";
+import { ControllerPet } from "../controller/ControllerCoach";
 import { validateTokenAuth } from "../middlewares/authMiddleware";
 
 const petRouter = Router();

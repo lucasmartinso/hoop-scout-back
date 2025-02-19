@@ -1,4 +1,4 @@
-import { Users } from "../entity/Usuario";
+import { Users } from "../entity/User";
 import * as userRepository from "../repositories/RepositoryUser";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";

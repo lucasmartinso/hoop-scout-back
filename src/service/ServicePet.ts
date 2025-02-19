@@ -1,5 +1,5 @@
-import { Pet } from "../entity/Pet";
-import { Users } from "../entity/Usuario";
+import { Pet } from "../entity/Coach";
+import { Users } from "../entity/User";
 import * as userRepository from "../repositories/RepositoryUser";
 import * as petRepository from "../repositories/RepositoryPet";
 
