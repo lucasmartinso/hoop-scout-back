@@ -1,15 +1,5 @@
 # <p align = "center">​Hoop Scout ​</p>
 
-<p align="center">
-   <img src="https://cdn.dribbble.com/users/5720644/screenshots/13912339/media/cfc570f6891e4aef4ae3c5282a767847.gif" width="600" height="400" object-fit="cover"/>
-</p>
-
-<p align = "center">
-   <img src="https://img.shields.io/badge/author-lucasmartinso-4dae71?style=flat-square" />
-   <img src="https://img.shields.io/github/languages/count/Vitorlealm/familia-inu-service-ts?color=4dae71&style=flat-square" />
-</p>
-
-
 ##  :clipboard: Description
 
 Colocar a descrição
@@ -21,7 +11,6 @@ Colocar a descrição
 - Bcrypt
 - Node.js
 - TypeScript
-- PostgresSQL
 
 ***
 
@@ -70,19 +59,13 @@ PUT /user/edit (autentify)
     }
 ```
 
-```yml 
-DELETE /user/delete (autentify)
-    - Route to certify the user is logged to edit and acess sensitive CRUD info 
-    - headers: {  "Authorization": `Bearer ${token}` }
-    - body: {}
-```
 
 ## 🏁 Running the application locally
 
 First, make the clone repository in your machine:
 
 ```
-git clone https://github.com/Vitorlealm/familia-inu-service-ts.git
+git clone https://github.com/lucasmartinso/hoop-scout-back.git
 ```
 
 After, inside the folder, run the comand to install the dependencies.
