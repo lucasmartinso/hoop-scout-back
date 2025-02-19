@@ -4,5 +4,6 @@ export class Coach{
   email: string;
   password: string;
   age: number;
+  userId: number;
   createdAt: Date;
 }

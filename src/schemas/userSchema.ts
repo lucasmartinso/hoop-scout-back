@@ -1,4 +1,4 @@
-import joi, { number } from "joi";
+import joi from "joi";
 
 export const userSchema = joi.object({ 
     email: joi.string().email().required().label("Fornecer email valido"),
