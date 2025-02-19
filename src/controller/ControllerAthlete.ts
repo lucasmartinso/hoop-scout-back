@@ -1,49 +1,23 @@
 import { Request, Response} from "express";
-import { Users } from "../entity/User";
-import * as userService from "../service/ServiceUser";
+import { Athlete } from "../entity/Athlete";
+//import * as athlteService from "../service/ServiceAthlete";
 
-export class ControllerUser {
+export class ControllerAthlete {
     public async getInfo(req: Request, res: Response) {
-        const { id }: { id: number } = res.locals.user;
-        const user: Users = await userService.getUserInfo(id);
-
-        return res.status(200).json(user);
+        //COMPLETAR
+        //CHAMAR O SERVICE
+        return res.status(200).json("athleta json");
     }
 
-    public async login(req: Request, res: Response) {
-        const user: Omit<Users,'id | createdAt | name'> = req.body;
-
-        const token: string = await userService.login(user);
-
-        return res.status(200).send({token});
+    public async probailityCalc(req: Request, res: Response) {
+        //COMPLETAR COM O CALCULO DE PROBABILIDADE 
+        //CHAMAR O SERVICE
+        return res.status(200).send("json do calculo");
     }
 
-    public async signup(req: Request, res: Response) {
-        const user: Omit<Users,'id | createdAt'> = req.body;
-
-        await userService.signup(user);
-
-        return res.status(201).send("Created user sucess");
-    }
-
-    public async editProfile(req: Request, res: Response) {
-        const { id }: { id: number } = res.locals.user;
-        const user: Omit<Users,'id | createdAt'> = req.body;
-
-        await userService.editProfile(user, id);
-
-        return res.status(200).send("Edited user profile sucess");
-    }
-
-    public async verifyAuthUser(req: Request, res: Response) {
-        return res.status(200).send("Perfil com autorizacao atleta");
-    }
-
-    public async verifyAuthAthlete(req: Request, res: Response) {
-        return res.status(200).send("Perfil com autorizacao de treinador");
-    }
-
-    public async verifyAuthCoach(req: Request, res: Response) {
-        return res.status(200).send("Perfil com autorizacao de treinador");
+    public async modelAthlete(req: Request, res: Response) {
+        //COMPLETAR COM O CALCULO DE PROBABILIDADE 
+        //CHAMAR O SERVICE
+        return res.status(200).send("json atleta modelo");
     }
 }

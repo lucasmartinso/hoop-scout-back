@@ -1,13 +1,13 @@
 import { Router } from "express";
-import { ControllerUser } from "../controller/ControllerUser";
 import { validateTokenAthleteAuth } from "../middlewares/authAthleteMiddleware";
+import { ControllerAthlete } from "../controller/ControllerAthlete";
 
-const userRouter = Router();
-const controllerUser = new ControllerUser();
+const athleteRouter = Router();
+const controllerAthlete = new ControllerAthlete();
 
 //SO SEGUIR A MESMA ESTRUTURA ABAIXO PARA AS DEMAIS ROTAS DESSE CONTROLLER
-userRouter.get('/athlete', validateTokenAthleteAuth,controllerUser.getInfo.bind(controllerUser));
-userRouter.get('/probability', validateTokenAthleteAuth, controllerUser.signup.bind(controllerUser));
-userRouter.get('/model', validateTokenAthleteAuth, )
+athleteRouter.get('/athlete', validateTokenAthleteAuth,controllerAthlete.getInfo.bind(controllerAthlete));
+athleteRouter.get('/probability', validateTokenAthleteAuth, controllerAthlete.probailityCalc.bind(controllerAthlete));
+athleteRouter.get('/model', validateTokenAthleteAuth, controllerAthlete.modelAthlete.bind(controllerAthlete));
 
-export default userRouter;
+export default athleteRouter;
