@@ -3,7 +3,7 @@ import { ControllerUser } from "../controller/ControllerUser";
 import schemaValidator from "../middlewares/schemaValidator";
 import { userSchema, loginSchema } from "../schemas/userSchema";
 import { validateTokenAuth } from "../middlewares/authMiddleware";
-import { validateTokenAdminAuth } from "../middlewares/authAdminMiddleware";
+import { validateTokenCoachAuth } from "../middlewares/authCoachMiddleware";
 
 const userRouter = Router();
 const controllerUser = new ControllerUser();
@@ -14,6 +14,7 @@ userRouter.post('/signup', schemaValidator(userSchema), controllerUser.signup.bi
 userRouter.post('/login', schemaValidator(loginSchema), controllerUser.login.bind(controllerUser));
 userRouter.put('/user/edit', validateTokenAuth, controllerUser.editProfile.bind(controllerUser)); 
 userRouter.post('/user/auth',validateTokenAuth, controllerUser.verifyAuthUser.bind(controllerUser));
-userRouter.post('/admin/auth',validateTokenAdminAuth, controllerUser.verifyAuthAdmin.bind(controllerUser));
+userRouter.post('/athlete/auth',validateTokenCoachAuth, controllerUser.verifyAuthAthlete.bind(controllerUser));
+userRouter.post('/coach/auth',validateTokenCoachAuth, controllerUser.verifyAuthCoach.bind(controllerUser));
 
 export default userRouter;

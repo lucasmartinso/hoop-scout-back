@@ -9,7 +9,7 @@ export async function getUserInfo(id: number) {
     
     if(!users) throw { type: 'Bad Request', message: 'Usuario inexistente' };
 
-    return users[0];
+    return users;
 }
 
 export async function signup(userInfo: Omit<Users,'id'>): Promise<void> {
@@ -34,9 +34,7 @@ export async function login(userInfo: Omit<Users,'id | createdAt | name'>): Prom
     const descryptPassword = await bcrypt.compareSync(userInfo.password, existEmail.password);
     if(!descryptPassword) throw { type: 'Unauthorized', message: 'Email ou senha invalidos' };
 
-    const role: string =  existEmail.email === process.env.AUTH_EMAIL ? 'admin' : 'client';
-
-    const token: string = gerateToken(existEmail.id, existEmail.email, role);
+    const token: string = gerateToken(existEmail.id, existEmail.email, existEmail.role);
 
     return token;
 }
@@ -58,7 +56,7 @@ function gerateToken(userId: number,email: string, role: string): string {
     const SECRET: string = process.env.TOKEN_SECRET_KEY ?? '';
     const EXPERIES_IN: string | undefined = process.env.EXPERIES_IN
 
-    const level: number = role === 'client' ? 1 : 2;
+    const level: number = role === 'user' ? 1 : (role === 'coach' ? 3 : 2);
 
     const payload: object = {
         userId, 

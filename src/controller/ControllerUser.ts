@@ -39,7 +39,11 @@ export class ControllerUser {
         return res.status(200).send("Perfil com autorizacao atleta");
     }
 
-    public async verifyAuthAdmin(req: Request, res: Response) {
+    public async verifyAuthAthlete(req: Request, res: Response) {
+        return res.status(200).send("Perfil com autorizacao de treinador");
+    }
+
+    public async verifyAuthCoach(req: Request, res: Response) {
         return res.status(200).send("Perfil com autorizacao de treinador");
     }
 }
