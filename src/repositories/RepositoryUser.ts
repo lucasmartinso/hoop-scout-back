@@ -27,7 +27,7 @@ export async function existEmail(email: string): Promise<Users | undefined> {
 }
 
 export async function createUser(user: Omit<Users,'id'>): Promise<void> {
-    const lastInd: number = users[-1].id;
+    const lastInd: number = users[users.length-1].id;
 
     users.push({id: lastInd+1, name: user.name, email: user.email, password: user.password, createdAt: new Date()});
 }
