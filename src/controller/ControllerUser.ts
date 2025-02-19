@@ -11,7 +11,7 @@ export class ControllerUser {
     }
 
     public async login(req: Request, res: Response) {
-        const user: Omit<Users,'id | number | createdAt | name'> = req.body;
+        const user: Omit<Users,'id | createdAt | name'> = req.body;
 
         const token: string = await userService.login(user);
 

@@ -17,7 +17,6 @@ const users: Users[] = [
     }
 ]
 
-
 export async function getUserById(id: number): Promise<Users | undefined> {
     return users.find(user => user.id === id);
 }
