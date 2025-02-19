@@ -1,4 +1,4 @@
-# <p align = "center">​🐶​ Familia Inu ​🐶​</p>
+# <p align = "center">​Hoop Scout ​</p>
 
 <p align="center">
    <img src="https://cdn.dribbble.com/users/5720644/screenshots/13912339/media/cfc570f6891e4aef4ae3c5282a767847.gif" width="600" height="400" object-fit="cover"/>
