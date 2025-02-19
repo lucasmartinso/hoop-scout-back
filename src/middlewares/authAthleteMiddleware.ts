@@ -12,7 +12,7 @@ export async function validateTokenAthleteAuth(req: Request, res: Response, next
     try {
         const SECRET: string = process.env.TOKEN_SECRET_KEY ?? '';
         const { role } = jwt.verify(token,SECRET) as { role: string }
-        if(role !== 'athlete') { 
+        if(role !== 'athlete' && role !== 'coach') { 
             throw { type: "Unauthorized", message: "Acesso bloqueado, autorização necessária"};
         }
         next();
