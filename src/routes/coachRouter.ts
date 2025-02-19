@@ -1,15 +1,15 @@
-// import { Router } from "express";
-// import { ControllerUser } from "../controller/ControllerUser";
-// import schemaValidator from "../middlewares/schemaValidator";
+import { Router } from "express";
+import { ControllerCoach } from "../controller/ControllerCoach";
+import schemaValidator from "../middlewares/schemaValidator";
+import { validateTokenCoachAuth } from "../middlewares/authCoachMiddleware";
 // import { userSchema, loginSchema } from "../schemas/userSchema";
-// import { validateTokenAuth } from "../middlewares/authMiddleware";
-// import { validateTokenCoachAuth } from "../middlewares/authCoachMiddleware";
-// import { validateTokenAthleteAuth } from "../middlewares/authAthleteMiddleware";
 
-// const coachRouter = Router();
-// const controllerCoach = new ControllerUser();
+const coachRouter = Router();
+const controllerCoach = new ControllerCoach();
 
-// //SO SEGUIR A MESMA ESTRUTURA ABAIXO PARA AS DEMAIS ROTAS DESSE CONTROLLER
+//SO SEGUIR A MESMA ESTRUTURA ABAIXO PARA AS DEMAIS ROTAS DESSE CONTROLLER
+coachRouter.get('/all/athletes', validateTokenCoachAuth,controllerCoach.getAllAthlete.bind(controllerCoach));
+coachRouter.get('/athlete/:id', validateTokenCoachAuth, controllerCoach.getEspecificAthlete.bind(controllerCoach));
+coachRouter.post('/grade/:id', validateTokenCoachAuth, controllerCoach.publishAthleteGrade.bind(controllerCoach));
 
-
-// export default coachRouter;
+export default coachRouter;
