@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Hoop Scout API",
   "main": "server.ts",
+  "engines": {
+    "node": "18"
+  },
   "scripts": {
     "build": "tsc",
     "start": "ts-node src/server.ts",
@@ -13,7 +16,7 @@
     "type": "git",
     "url": "git+https://github.com/lucasmartinso/hoop-scout-back.git"
   },
-  "author": "Gabriel Campos, Lucas Martins, Paulo Aquino, Victoria Tiemi, Vitor Leal",
+  "author": "Christian, Caio, Lucas Martins",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/lucasmartinso/hoop-scout-back/issues"
