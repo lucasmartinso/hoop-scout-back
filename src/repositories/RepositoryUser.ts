@@ -16,6 +16,22 @@ const users: Users[] = [
         password: 'jairo',
         role: 'user',
         createdAt: new Date(),
+    },
+    {
+        id: 3,
+        name: 'usuario',
+        email: 'usuario@gmail.com',
+        password: 'fabricio123',
+        role: 'coach',
+        createdAt: new Date(),
+    },
+    {
+        id: 4,
+        name: 'abc',
+        email: 'abc@gmail.com',
+        password: 'fabricio123',
+        role: 'athlete',
+        createdAt: new Date(),
     }
 ]
 
