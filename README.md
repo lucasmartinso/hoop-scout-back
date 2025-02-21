@@ -31,8 +31,7 @@ POST /signup
     - headers: {}
     - body: {
         "email": "lorem@domain.com",
-        "name": "lorem ipsum"
-        "number": "123456789",
+        "name": "lorem ipsum",
         "password": "**********"
     }
 ```
@@ -53,8 +52,7 @@ PUT /user/edit (autentify)
     - headers: {  "Authorization": `Bearer ${token}` }
     - body: {
         "email": "lorem@domain.com",
-        "name": "lorem ipsum"
-        "number": "123456789",
+        "name": "lorem ipsum",
         "password": "**********"
     }
 ```
