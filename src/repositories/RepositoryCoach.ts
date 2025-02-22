@@ -1,16 +1,13 @@
 import { Athlete } from "../entity/Athlete";
-import { Coach } from "../entity/Coach";
-import { atletas } from "./RepositoryAthlete";
-
-const coachs: Coach[] = [
-    {
-        id: 1,
-        age: 10,
-        userId: 3,
-        createdAt: new Date()
-    }
-];
+import { QueryResult } from "pg";
+import { Users } from "../entity/User";
+import connection from "../database/postgres";
 
 export async function getAllAthletes(): Promise<Athlete[]> {
-    return atletas;
+    const { rows: athletes }: QueryResult<Users> = await connection.query(`
+        SELECT * FROM "User"
+        WHERE role = 'athlete'
+    `);
+    
+    return athletes;
 }
