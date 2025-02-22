@@ -31,6 +31,7 @@ export async function login(userInfo: Omit<Users,'id | createdAt | name'>): Prom
     const existEmail: Users = await userRepository.existEmail(userInfo.email);  
     if(!existEmail) throw { type: 'Unauthorized', message: 'Email ou senha invalidos' };
 
+    console.log("AQUII");
     const descryptPassword = await bcrypt.compareSync(userInfo.password, existEmail.password);
     if(!descryptPassword) throw { type: 'Unauthorized', message: 'Email ou senha invalidos' };
 

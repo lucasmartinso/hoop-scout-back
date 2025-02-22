@@ -20,13 +20,13 @@ export class ControllerAthlete {
         }
 
         // Buscar o atleta no "banco de dados" (array)
-        const athlete = athletesDB.find(a => a.id === athleteId);
+        const athlete = 1; //athletesDB.find(a => a.id === athleteId);
 
         if (!athlete) {
             return res.status(404).json({ error: 'Atleta não encontrado' });
         }
 
-        return res.status(200).json(athlete);
+        return res.status(200).json('athlete');
     }
 
     public async modelAthlete(req: Request, res: Response): Promise<Response> {
@@ -86,7 +86,7 @@ export class ControllerAthlete {
         }
 
         // Buscar o atleta real pelo ID
-        const athlete = athletesDB.find(a => a.id === athleteId);
+        const athlete = {idade: 14, peso: '80kg', altura: '1.90m', arremesso_livre: 'akc', arremesso_2_pontos: '1', arremesso_3_pontos: '1', assistencias_por_jogo: 12} //athletesDB.find(a => a.id === athleteId);
         if (!athlete) {
             return res.status(404).json({ error: 'Atleta não encontrado' });
         }
