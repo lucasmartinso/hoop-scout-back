@@ -1,58 +1,37 @@
+import { QueryResult } from "pg";
 import { Users } from "../entity/User";
+import connection from "../database/postgres";
 
-const users: Users[] = [
-    {
-        id: 1,
-        name: 'Fabricio',
-        email: 'fabricio@gmail.com',
-        password: 'fabricio',
-        role: 'user',
-        createdAt: new Date(),
-    },
-    {
-        id: 2,
-        name: 'Jairo',
-        email: 'jairo@gmail.com',
-        password: 'jairo',
-        role: 'user',
-        createdAt: new Date(),
-    },
-    {
-        id: 3,
-        name: 'usuario',
-        email: 'usuario@gmail.com',
-        password: 'fabricio123',
-        role: 'coach',
-        createdAt: new Date(),
-    },
-    {
-        id: 4,
-        name: 'abc',
-        email: 'abc@gmail.com',
-        password: 'fabricio123',
-        role: 'athlete',
-        createdAt: new Date(),
-    }
-]
+export async function getUserById(id: number): Promise<Users[]> {
+    const { rows: users }: QueryResult<Users> = await connection.query(`
+        SELECT * FROM "User"
+        WHERE id = $1
+    `,[id]);
 
-export async function getUserById(id: number): Promise<Users | undefined> {
-    return users.find(user => user.id === id);
+    return users;
 }
 
-export async function existEmail(email: string): Promise<Users | undefined> { 
-    return users.find(user => user.email === email);
+export async function existEmail(email: string): Promise<Users[]> {
+    const { rows: users }: QueryResult<Users> = await connection.query(`
+        SELECT * FROM "User"
+        WHERE email = $1
+    `,[email]); 
+    
+    return users;
 }
 
-export async function createUser(user: Omit<Users,'id' | 'role'>): Promise<void> {
-    const lastInd: number = users[users.length-1].id;
-
-    users.push({id: lastInd+1, name: user.name, email: user.email, password: user.password, role: 'user', createdAt: new Date()});
+export async function createUser(user: Omit<Users,'id'>): Promise<void> {
+    await connection.query(`
+        INSERT INTO "User"
+        (email, name, number, password, "createdAt")
+        VALUES ($1, $2, $3, $4, $5)
+    `,[user.email, user.name, user.role, user.password, user.createdAt]);     
 }
 
-export async function editProfile(user: Omit<Users,'id | createdAt'>, id: number): Promise<void> {
-    const index: number = users.findIndex(us => us.id === id);
-
-    if(user.name) users[index].name = user.name;
-    if(user.email) users[index].email = user.email;
-    if(user.password) users[index].password = user.password;
+export async function editProfile(user: Omit<Users,'id | role | createdAt'>, id: number): Promise<void> {
+    await connection.query(`
+        UPDATE "User" 
+        SET email = $2, name = $3, number = $4, password = $5
+        WHERE id = $1
+    `,[id, user.email, user.name, user.password]);     
 }
