@@ -23,6 +23,7 @@ export async function signup(userInfo: Omit<Users,'id'>): Promise<void> {
     const currentDate = new Date();
     const currentDateBrazil = new Date(currentDate.getTime() - 3 * 60 * 60 * 1000);
     userInfo.createdAt = currentDateBrazil;
+    userInfo.role = 'user';
 
     await userRepository.createUser(userInfo);
 }

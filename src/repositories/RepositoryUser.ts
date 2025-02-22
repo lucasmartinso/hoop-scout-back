@@ -23,7 +23,7 @@ export async function existEmail(email: string): Promise<Users[]> {
 export async function createUser(user: Omit<Users,'id'>): Promise<void> {
     await connection.query(`
         INSERT INTO "User"
-        (email, name, number, password, "createdAt")
+        (email, name, role, password, "createdAt")
         VALUES ($1, $2, $3, $4, $5)
     `,[user.email, user.name, user.role, user.password, user.createdAt]);     
 }
@@ -31,7 +31,7 @@ export async function createUser(user: Omit<Users,'id'>): Promise<void> {
 export async function editProfile(user: Omit<Users,'id | role | createdAt'>, id: number): Promise<void> {
     await connection.query(`
         UPDATE "User" 
-        SET email = $2, name = $3, number = $4, password = $5
+        SET email = $2, name = $3, password = $4
         WHERE id = $1
     `,[id, user.email, user.name, user.password]);     
 }
