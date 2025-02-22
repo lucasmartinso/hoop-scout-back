@@ -6,3 +6,9 @@ export async function getAllAthletes(): Promise<Athlete[]> {
 
     return atletas;
 }
+
+export async function getAthleteById(id: number): Promise<Athlete> {
+    const atletas: Athlete[] = await coachRepository.getAthleteById(id);
+
+    return atletas[0];
+}

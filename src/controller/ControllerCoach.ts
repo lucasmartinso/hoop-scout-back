@@ -1,5 +1,4 @@
 import { Request, Response} from "express";
-import { Coach } from "../entity/Coach";
 import * as coachService from "../service/ServiceCoach";
 import { Athlete } from "../entity/Athlete";
 
@@ -18,7 +17,10 @@ export class ControllerCoach {
     }
 
     public async getEspecificAthlete(req: Request, res: Response) {
-        //CHAMAR O SERVICE
-        return res.status(200).send("json do atleta especifico");
+        const id: number = Number(req.params.id);
+
+        const athlete: Athlete = await coachService.getAthleteById(id);
+
+        return res.status(200).send(athlete);
     }
 }

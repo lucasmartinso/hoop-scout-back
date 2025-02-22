@@ -15,9 +15,10 @@ export async function getAllAthletes(): Promise<Athlete[]> {
 
 export async function getAthleteById(id: number): Promise<Athlete[]> {
     const { rows: athletes }: QueryResult<Athlete> = await connection.query(`
-        SELECT * FROM "User"
+        SELECT * 
+        FROM "User" u
         LEFT JOIN "Athlete" a ON a."userId" = u.id 
-        WHERE role = 'athlete' AND id = $1
+        WHERE role = 'athlete' AND u.id = $1
     `,[id]);
     
     return athletes;
