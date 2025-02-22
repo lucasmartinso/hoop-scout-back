@@ -1,8 +1,8 @@
-import { Users } from "../entity/User";
+import { Athlete } from "../entity/Athlete";
 import * as coachRepository from "../repositories/RepositoryCoach";
 
-export async function getAllAthletes(): Promise<Users[]> {
-    const atletas: Users[] = await coachRepository.getAllAthletes();
+export async function getAllAthletes(): Promise<Athlete[]> {
+    const atletas: Athlete[] = await coachRepository.getAllAthletes();
 
     return atletas;
 }
