@@ -12,8 +12,6 @@ app.use(cors());
 
 const startServer = async () => {
     try {
-      // Estabeleça a conexão com o banco de dados
-      //await createConnection();
       
       app.use(routers);
       app.use(errorHandler);
@@ -26,20 +24,3 @@ const startServer = async () => {
   startServer();
 
 export default app;
-
-// async function start() {
-//   createConnection().then(async connection => {
-//     const userRepository = connection.getRepository(Usuario);
-  
-//     app.get("/", async (req, res) => {
-//       const users = await userRepository.find();
-//       res.json(users);
-//     });
-  
-//     app.listen(port, () => {
-//       console.log(`Server is running on http://localhost:${port}`);
-//     });
-//   }).catch(error => console.log(error));
-// }
-
-// start();

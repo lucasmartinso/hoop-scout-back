@@ -4,17 +4,17 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 //----------------SERVICES CHAMADAS PELOS CONTROLLERS --------------------
-export async function getUserInfo(id: number) {
-    const users: Users | undefined = await userRepository.getUserById(id);
+export async function getUserInfo(id: number): Promise<Users> {
+    const users: Users[] = await userRepository.getUserById(id);
     
-    if(!users) throw { type: 'Bad Request', message: 'Usuario inexistente' };
+    if(!users.length) throw { type: 'Bad Request', message: 'Usuario inexistente' };
 
-    return users;
+    return users[0];
 }
 
 export async function signup(userInfo: Omit<Users,'id'>): Promise<void> {
-    const existEmail: Users = await userRepository.existEmail(userInfo.email); 
-    if(existEmail) throw { type: 'Conflit', message: 'Email de usuario ja cadastrado' };
+    const existEmail: Users[] = await userRepository.existEmail(userInfo.email); 
+    if(existEmail.length) throw { type: 'Conflit', message: 'Email de usuario ja cadastrado' };
 
     const saltRounds = 10; //maior, mais seguro, porem mais lento
     const encryptPassword: string = bcrypt.hashSync(userInfo.password, saltRounds);
@@ -28,21 +28,20 @@ export async function signup(userInfo: Omit<Users,'id'>): Promise<void> {
 }
 
 export async function login(userInfo: Omit<Users,'id | createdAt | name'>): Promise<string> {
-    const existEmail: Users = await userRepository.existEmail(userInfo.email);  
-    if(!existEmail) throw { type: 'Unauthorized', message: 'Email ou senha invalidos' };
+    const existEmail: Users[] = await userRepository.existEmail(userInfo.email);  
+    if(!existEmail.length) throw { type: 'Unauthorized', message: 'Email ou senha invalidos' };
 
-    console.log("AQUII");
-    const descryptPassword = await bcrypt.compareSync(userInfo.password, existEmail.password);
+    const descryptPassword = await bcrypt.compareSync(userInfo.password, existEmail[0].password);
     if(!descryptPassword) throw { type: 'Unauthorized', message: 'Email ou senha invalidos' };
 
-    const token: string = gerateToken(existEmail.id, existEmail.email, existEmail.role);
+    const token: string = gerateToken(existEmail[0].id, existEmail[0].email, existEmail[0].role);
 
     return token;
 }
 
 export async function editProfile(userInfo: Omit<Users,'id | createdAt'>, id: number): Promise<void> {
-    const users: Users | null = await userRepository.getUserById(id);
-    if(!users) throw { type: 'Not Found', message: 'Usuario nao encontrado' };
+    const users: Users[] = await userRepository.getUserById(id);
+    if(!users.length) throw { type: 'Not Found', message: 'Usuario nao encontrado' };
 
     const saltRounds = 10; //maior, mais seguro, porem mais lento
     const encryptPassword: string = bcrypt.hashSync(userInfo.password, saltRounds);
