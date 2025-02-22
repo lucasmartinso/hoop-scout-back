@@ -2,10 +2,11 @@ import { Request, Response} from "express";
 import { Coach } from "../entity/Coach";
 import * as coachService from "../service/ServiceCoach";
 import { Athlete } from "../entity/Athlete";
+import { Users } from "../entity/User";
 
 export class ControllerCoach {
     public async getAllAthlete(req: Request, res: Response) {
-        const atletas: Athlete[] = await coachService.getAllAthletes();
+        const atletas: Users[] = await coachService.getAllAthletes();
 
         return res.status(200).json(atletas);
     }
