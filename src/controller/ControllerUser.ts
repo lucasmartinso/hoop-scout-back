@@ -23,7 +23,7 @@ export class ControllerUser {
 
         await userService.signup(user);
 
-        return res.status(201).send("Created user sucess");
+        return res.status(201).send("Usuário criado com sucesso");
     }
 
     public async editProfile(req: Request, res: Response) {
@@ -32,7 +32,7 @@ export class ControllerUser {
 
         await userService.editProfile(user, id);
 
-        return res.status(200).send("Edited user profile sucess");
+        return res.status(200).send("Perfil editado com sucesso");
     }
 
     public async verifyAuthUser(req: Request, res: Response) {
