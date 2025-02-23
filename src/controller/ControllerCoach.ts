@@ -1,6 +1,7 @@
 import { Request, Response} from "express";
 import * as coachService from "../service/ServiceCoach";
 import { Athlete } from "../entity/Athlete";
+import { ratingType } from "../types/ratingType";
 
 export class ControllerCoach {
     public async getAllAthlete(req: Request, res: Response) {
@@ -10,10 +11,9 @@ export class ControllerCoach {
     }
 
     public async publishAthleteGrade(req: Request, res: Response) {
-        const data: any = req.body;
+        const data: ratingType = req.body;
         const id: number = Number(req.params.id);
-        
-        console.log(data);
+                
         await coachService.publishAthleteGrade(data, id);
         
         return res.status(200).send("Avaliação de atleta realizada");

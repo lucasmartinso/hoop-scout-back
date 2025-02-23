@@ -35,12 +35,6 @@ ALTER TABLE
     "Coach" ADD PRIMARY KEY("id");
 ALTER TABLE
     "Coach" ADD CONSTRAINT "coach_userid_unique" UNIQUE("userId");
-CREATE TABLE "Ratings"(
-    "id" SERIAL NOT NULL,
-    "athleteId" INTEGER NOT NULL,
-    "coachId" INTEGER NOT NULL,
-    "createdAt" DATE NOT NULL
-);
 ALTER TABLE
     "Ratings" ADD PRIMARY KEY("id");
 ALTER TABLE

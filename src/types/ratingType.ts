@@ -5,5 +5,5 @@ export interface ratingType {
     freeThrow: string;
     longShot: string;
     shortShot: string;
-    assistsGame: number
+    assistsGame: number;
 }
