@@ -6,8 +6,8 @@ export async function getProbabilityCalc(id: number): Promise<Athlete[]> {
     const { rows: athletes }: QueryResult<Athlete> = await connection.query(`
         SELECT "height", "weight", "age", "freeThrow", "longShot", "shortShot", "assistsGame"
         FROM "Athlete"
-        WHERE "id" = $1;
-    `);
+        WHERE "userId" = $1;
+    `,[id]);
     
     return athletes;
 }
@@ -16,7 +16,7 @@ export async function getAthleteData(id: number): Promise<Athlete[]> {
     const { rows: athletes }: QueryResult<Athlete> = await connection.query(`
         SELECT * 
         FROM "Athlete" 
-        WHERE "id" = $1;
+        WHERE "userId" = $1;
     `,[id]);
     
     return athletes;
