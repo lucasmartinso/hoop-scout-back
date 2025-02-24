@@ -57,6 +57,39 @@ PUT /user/edit (autentify)
     }
 ```
 
+### ​🧑‍🏫​ Coach 
+
+```yml
+GET /all/athletes (autentify)
+    - Route to get all athletes
+    - headers: { "Authorization": `Bearer ${token}` }
+    - body:{}
+```
+    
+```yml 
+GET /athlete/:id
+    - Route to acess especific info by athlete
+    - headers: { "Authorization": `Bearer ${token}` }
+    - params: id: number
+    - body:{}
+```
+
+```yml 
+POST /grade/:id
+    - Route to send athlete perform
+    - headers: {}
+    - params: id: number
+    - body: {
+    	"age": number, 
+        "height": "X.XXm",
+    	"weight": "XXkg",
+    	"freeThrow": "XX%",
+    	"longShot": "XX%",
+    	"shortShot": "XX%",
+    	"assistsGame": number
+    }
+```
+
 
 ## 🏁 Running the application locally
 
