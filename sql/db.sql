@@ -25,23 +25,10 @@ ALTER TABLE
     "Athlete" ADD PRIMARY KEY("id");
 ALTER TABLE
     "Athlete" ADD CONSTRAINT "athlete_userid_unique" UNIQUE("userId");
-CREATE TABLE "Coach"(
-    "id" SERIAL NOT NULL,
-    "age" INTEGER NOT NULL,
-    "userId" INTEGER NOT NULL,
-    "createdAt" DATE NOT NULL
-);
-ALTER TABLE
-    "Coach" ADD PRIMARY KEY("id");
-ALTER TABLE
-    "Coach" ADD CONSTRAINT "coach_userid_unique" UNIQUE("userId");
-ALTER TABLE
-    "Ratings" ADD PRIMARY KEY("id");
-ALTER TABLE
-    "Ratings" ADD CONSTRAINT "ratings_coachid_foreign" FOREIGN KEY("coachId") REFERENCES "Coach"("id");
 ALTER TABLE
     "Athlete" ADD CONSTRAINT "athlete_userid_foreign" FOREIGN KEY("userId") REFERENCES "User"("id");
-ALTER TABLE
-    "Ratings" ADD CONSTRAINT "ratings_athleteid_foreign" FOREIGN KEY("athleteId") REFERENCES "Athlete"("id");
-ALTER TABLE
-    "Coach" ADD CONSTRAINT "coach_userid_foreign" FOREIGN KEY("userId") REFERENCES "User"("id");
+ALTER TABLE "Athlete" 
+    ADD COLUMN "coachId" INTEGER, 
+    ADD COLUMN "createdAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
+ALTER TABLE "Athlete" 
+    ADD CONSTRAINT fk_coach FOREIGN KEY ("coachId") REFERENCES "User"(id) ON DELETE SET NULL;
