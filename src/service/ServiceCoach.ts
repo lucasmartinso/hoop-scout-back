@@ -1,7 +1,5 @@
 import { Athlete } from "../entity/Athlete";
-import { Users } from "../entity/User";
 import * as coachRepository from "../repositories/RepositoryCoach";
-import * as userRepository from "../repositories/RepositoryUser";
 import { ratingType } from "../types/ratingType";
 
 export async function getAllAthletes(): Promise<Athlete[]> {
@@ -17,11 +15,13 @@ export async function getAthleteById(id: number): Promise<Athlete> {
     return atletas[0];
 }
 
-export async function publishAthleteGrade(rating: ratingType, id: number): Promise<void> {
-    const athlete: Athlete = await getAthleteById(id); 
+export async function publishAthleteGrade(rating: ratingType, athleteId: number, coachId: number): Promise<void> {
+    const athlete: Athlete = await getAthleteById(athleteId); 
     if(!athlete) throw { type: 'Bad Request', message: 'Usuario-atleta inexistente' };
 
     if(athlete.assistsGame) throw { type: 'Bad Request', message: 'Atleta ja foi avaliado' };
-    
-    await coachRepository.publishAthleteGrade(rating, id);
+    rating.coachId = coachId;
+    console.log(rating);
+
+    await coachRepository.publishAthleteGrade(rating, athleteId);
 }
