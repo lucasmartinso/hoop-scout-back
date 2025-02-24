@@ -23,7 +23,8 @@ export async function getProbabilityCalc(id: number): Promise<number> {
         (calculateScore(athlete[0].assistsGame, athleteOuro.assistsGame) * 0.10);
 
     // Garantir que a probabilage tenha apenas duas casas decimais
-    const formattedProbability = parseFloat(probability.toFixed(2));
+    let formattedProbability = parseFloat(probability.toFixed(2));
+    if(formattedProbability > 90) formattedProbability = 90.00;
 
     return formattedProbability;
 }
