@@ -21,7 +21,6 @@ export async function publishAthleteGrade(rating: ratingType, athleteId: number,
 
     if(athlete.assistsGame) throw { type: 'Bad Request', message: 'Atleta ja foi avaliado' };
     rating.coachId = coachId;
-    console.log(rating);
 
     await coachRepository.publishAthleteGrade(rating, athleteId);
 }

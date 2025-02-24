@@ -53,7 +53,6 @@ export async function editProfile(userInfo: Omit<Users,'id | createdAt'>, id: nu
     
     if(!userInfo.name) userInfo.name = users[0].name;
     if(!userInfo.email) userInfo.email = users[0].email;
-    console.log(userInfo);
 
     await userRepository.editProfile(userInfo, id);
 }
