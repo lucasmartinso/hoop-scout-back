@@ -44,9 +44,15 @@ export async function editProfile(userInfo: Omit<Users,'id | createdAt'>, id: nu
     const users: Users[] = await userRepository.getUserById(id);
     if(!users.length) throw { type: 'Not Found', message: 'Usuario nao encontrado' };
 
-    const saltRounds = 10; //maior, mais seguro, porem mais lento
-    const encryptPassword: string = bcrypt.hashSync(userInfo.password, saltRounds);
-    userInfo.password = encryptPassword;
+    if(!userInfo.password) userInfo.password = users[0].password;
+    else {
+        const saltRounds = 10; //maior, mais seguro, porem mais lento
+        const encryptPassword: string = bcrypt.hashSync(userInfo.password, saltRounds);
+        userInfo.password = encryptPassword;
+    }
+    
+    if(!userInfo.name) userInfo.name = users[0].name;
+    if(!userInfo.email) userInfo.email = users[0].email;
 
     await userRepository.editProfile(userInfo, id);
 }
