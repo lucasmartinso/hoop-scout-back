@@ -28,7 +28,7 @@ ALTER TABLE
 ALTER TABLE
     "Athlete" ADD CONSTRAINT "athlete_userid_foreign" FOREIGN KEY("userId") REFERENCES "User"("id");
 ALTER TABLE "Athlete" 
-    ADD COLUMN "coachId" INTEGER, 
+    ADD COLUMN "coachId" INTEGER NOT NULL, 
     ADD COLUMN "createdAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
 ALTER TABLE "Athlete" 
     ADD CONSTRAINT fk_coach FOREIGN KEY ("coachId") REFERENCES "User"(id) ON DELETE SET NULL;

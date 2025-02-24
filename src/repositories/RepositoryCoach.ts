@@ -27,7 +27,7 @@ export async function getAthleteById(id: number): Promise<Athlete[]> {
 export async function publishAthleteGrade(rating: any, id: number): Promise<void> {
     await connection.query(`
         INSERT INTO "Athlete"
-        ("userId", age, height, weight, "freeThrow", "longShot", "shortShot", "assistsGame")
-        VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
-    `,[id, rating.age, rating.height, rating.weight, rating.freeThrow, rating.longShot, rating.shortShot, rating.assistsGame]);
+        ("userId", age, height, weight, "freeThrow", "longShot", "shortShot", "assistsGame", "coachId")
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+    `,[id, rating.age, rating.height, rating.weight, rating.freeThrow, rating.longShot, rating.shortShot, rating.assistsGame, rating.coachId]);
 }

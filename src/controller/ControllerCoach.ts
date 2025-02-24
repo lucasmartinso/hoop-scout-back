@@ -12,9 +12,10 @@ export class ControllerCoach {
 
     public async publishAthleteGrade(req: Request, res: Response) {
         const data: ratingType = req.body;
-        const id: number = Number(req.params.id);
+        const athleteId: number = Number(req.params.id);
+        const { id }: { id: number } = res.locals.user;
                 
-        await coachService.publishAthleteGrade(data, id);
+        await coachService.publishAthleteGrade(data, athleteId, id);
         
         return res.status(200).send("Avaliação de atleta realizada");
     }

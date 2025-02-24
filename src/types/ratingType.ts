@@ -6,4 +6,5 @@ export interface ratingType {
     longShot: string;
     shortShot: string;
     assistsGame: number;
+    coachId: number | null;
 }
