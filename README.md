@@ -1,8 +1,8 @@
-# <p align = "center">​Hoop Scout ​</p>
+# <p align = "center">🏀 ​Hoop Scout 🏀​</p>
 
 ##  :clipboard: Description
 
-Colocar a descrição
+Api que controla o sistema de avaliação de jogadores de basket, calculando a probabilidade dos mesmos terem chances profissionais com métricas avançadas, assegurando a segurança dos dados criptografada e com arquitetura rigida de camadas, seguindo principios do SOLID e Clean Code.
 ***
 
 ## :computer:	 Tecnolgy and Concepts 
@@ -88,6 +88,30 @@ POST /grade/:id
     	"shortShot": "XX%",
     	"assistsGame": number
     }
+```
+
+### ​⛹️​​ Athlete 
+
+```yml
+GET /model (autentify)
+    - Route to get model athlete of his age
+    - headers: { "Authorization": `Bearer ${token}` }
+    - body:{}
+```
+    
+```yml 
+GET /athlete
+    - Route to acess personal info athlete
+    - headers: { "Authorization": `Bearer ${token}` }
+    - body:{}
+```
+
+```yml 
+GET /probability
+    - Route to get probability to be professional
+    - headers: {}
+    - params: id: number
+    - body: {}
 ```
 
 
