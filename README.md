@@ -67,7 +67,7 @@ GET /all/athletes (autentify)
 ```
     
 ```yml 
-GET /athlete/:id
+GET /athlete/:id (autentify)
     - Route to acess especific info by athlete
     - headers: { "Authorization": `Bearer ${token}` }
     - params: id: number
@@ -75,7 +75,7 @@ GET /athlete/:id
 ```
 
 ```yml 
-POST /grade/:id
+POST /grade/:id (autentify)
     - Route to send athlete perform
     - headers: {}
     - params: id: number
@@ -100,14 +100,14 @@ GET /model (autentify)
 ```
     
 ```yml 
-GET /athlete
+GET /athlete (autentify)
     - Route to acess personal info athlete
     - headers: { "Authorization": `Bearer ${token}` }
     - body:{}
 ```
 
 ```yml 
-GET /probability
+GET /probability (autentify)
     - Route to get probability to be professional
     - headers: {}
     - params: id: number
@@ -135,4 +135,4 @@ To finish the process, to init the server
 npm start or npm run dev
 ```
 
-:stop_sign: Don't forget to repeat the sequence above with [repository-do-front](https://github.com/) that contains the interface of aplication, to test the project per complet.
+:stop_sign: Don't forget to repeat the sequence above with [repository-do-front](https://github.com/brenolino/hoop-scout) that contains the interface of aplication, to test the project per complet.
