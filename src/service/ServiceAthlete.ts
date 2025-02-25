@@ -36,43 +36,16 @@ export async function getAthleteById(id: number): Promise<Athlete> {
     return atletas[0];
 }
 
-export async function getModelAthlete(id: number): Promise<Athlete> {
-    const atletas: Athlete[] = await athleteRepository.getAthleteData(id);
-    if(!atletas.length) throw { type: 'Bad Request', message: 'Atleta ainda não avaliado' };
-
-    let athleteModel;
-
-    if (atletas[0].age <= 14) {
-        athleteModel = {
-            height: '1,80m',
-            weight: '70kg',
-            age: 14,
-            freeThrow: '85%',
-            shortShot: '55%',
-            longShot: '40%',
-            assistsGame: 6,
-        };
-    } else if (atletas[0].age <= 17) {
-        athleteModel = {
-            height: '1,90m',
-            weight: '80kg',
-            age: 17,
-            freeThrow: '90%',
-            shortShot: '60%',
-            longShot: '45%',
-            assistsGame: 8,
-        };
-    } else {
-        athleteModel = {
-            height: '1,90m',
-            weight: '80kg',
-            age: 21,
-            freeThrow: '90%',
-            shortShot: '80%',
-            longShot: '55%',
-            assistsGame: 11,
-        };
-    }
+export async function getModelAthlete(id: number): Promise<any> {
+    const athleteModel = {
+        height: '1,90m',
+        weight: '85kg',
+        age: 18,
+        freeThrow: '95%',
+        shortShot: '90%',
+        longShot: '85%',
+        assistsGame: 15,
+    };
 
     return athleteModel;
 }
